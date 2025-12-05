@@ -20,7 +20,14 @@ public class UIdataupdate : MonoBehaviour
     private void OnEnable()
     {
         // 랭킹 화면이 활성화될 때마다 최신 데이터로 업데이트, 게임 오브젝트 활성화 비활성화마다 반영
-        DisplayRanking();
+        if (DataManager.instance != null)
+        {
+            DisplayRanking();
+        }
+        else
+        {
+            Debug.LogError("DataManager 인스턴스를 찾을 수 없습니다! 랭킹 업데이트 실패.");
+        }
     }
     public void DisplayRanking()
     {

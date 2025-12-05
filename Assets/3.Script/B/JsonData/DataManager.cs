@@ -90,10 +90,10 @@ public class DataManager : MonoBehaviour
             if (instancePrivate == null)
             {
                 // 인스턴스가 없을 경우 찾아주거나 에러를 로그합니다.
-                instancePrivate = FindObjectOfType<DataManager>();
+                instancePrivate = FindAnyObjectByType<DataManager>();//FindObjectOfType<DataManager>(); 쓰지마라...
                 if (instancePrivate == null)
                 {
-                    Debug.LogError("DataManager 인스턴스를 씬에서 찾을 수 없습니다! 씬에 DataManager 컴포넌트를 가진 GameObject가 있는지 확인하세요.");
+                    Debug.LogError("DataManager 인스턴스를 씬에서 찾을 수 없습니다.");
                 }
             }
             return instancePrivate;
@@ -106,17 +106,16 @@ public class DataManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Awake 실행됨: " + gameObject.name);
-        if (instancePrivate == null)
-        {
-            instancePrivate = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (instancePrivate != null&& instancePrivate != this)
         {
             Destroy(gameObject);
+            return;
         }
-
+        instancePrivate = this;
+        DontDestroyOnLoad(gameObject);
         path = Path.Combine(Application.persistentDataPath, filename);//파일경로에 파일이름을 합쳐서 string화
+        
+        
         //persistentDataPath 경로
         //C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
 
