@@ -9,12 +9,21 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private PlayerInput Input;
 	private Rigidbody player_r;
 
+	[SerializeField] private MapSize size;
+
 	private void Awake() {
 		TryGetComponent(out player_r);
 	}
 
 	private void FixedUpdate() {
 		Move();
+
+		transform.position = new Vector3(
+			Mathf.Clamp(transform.position.x, size.LimitMin.x, size.LimitMax.x),
+			transform.position.y,
+			Mathf.Clamp(transform.position.z, size.LimitMin.z, size.LimitMax.z)
+			);
+
 	}
 
 	private void Move() {
