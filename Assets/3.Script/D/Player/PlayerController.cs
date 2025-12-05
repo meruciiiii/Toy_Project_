@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private float playerSpeed = 10f;
+	protected float playerSpeed = 10f;
 
 	[SerializeField] private PlayerInput Input;
 	private Rigidbody player_r;
