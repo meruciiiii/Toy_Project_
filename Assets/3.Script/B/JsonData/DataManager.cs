@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using LitJson; //플러그인
+//using LitJson; //플러그인
 using UnityEngine;
 
 public enum Charactor
@@ -50,7 +50,7 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
     //플레이어 이름 string (키보드 입력 받아서 저장)
     //기록(시간) float double ->기록에 따라 랭킹 순서
     //기록의 경우 Time.deltatime -> 시간 초로 변환해서 20:00에서 빼서 높으면 점수가 높은거다.(6:00 칼퇴가 중요하다.)
-    
+
     public string Playername;
     public Charactor charactor;
     public int cleartime;
@@ -105,6 +105,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Awake 실행됨: " + gameObject.name);
         if (instancePrivate == null)
         {
             instancePrivate = this;
@@ -114,7 +115,7 @@ public class DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         path = Path.Combine(Application.persistentDataPath, filename);//파일경로에 파일이름을 합쳐서 string화
         //persistentDataPath 경로
         //C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
@@ -124,9 +125,15 @@ public class DataManager : MonoBehaviour
         //SaveToJson(new Data("",0,0f));
         //SaveToJson(new Data("",Charactor.Song, 0f));
     }
+    private void OnEnable()
+    {
+        Debug.Log("OnEnable 실행: " + gameObject.name);
+    }
+
 
     private void Start()
     {
+        Debug.Log("Start 실행됨: " + gameObject.name);
         if (!File.Exists(path))// path = Path.Combine(Application.persistentDataPath, filename); 파일 명까지의 경로가 없다면
         {
             SaveToJson(new Ranking());
@@ -139,10 +146,12 @@ public class DataManager : MonoBehaviour
 
     public void SaveToJson(Ranking ranking) //총 랭킹 데이터 저장 메서드
     {
-        string jsonData = JsonMapper.ToJson(ranking); //랭킹데이터를 제이슨으로 바꾸기 전에 string에 넣어서
-
+        string jsonData = JsonUtility.ToJson(ranking); //랭킹데이터를 제이슨으로 바꾸기 전에 string에 넣어서
+        //string jsonData = JsonMapper.ToJson(ranking); //랭킹데이터를 제이슨으로 바꾸기 전에 string에 넣어서
+        
         File.WriteAllText(path, jsonData); //경로(파일)안에 그 string 데이터를 전부 적어넣는다.
         Debug.Log("랭킹 데이터 저장 완료");
+        
     }
 
     public Ranking LoadFromJson()//총 랭킹 데이터 불러오기 메서드
@@ -158,8 +167,8 @@ public class DataManager : MonoBehaviour
         // 파일을 불러옴
         string jsonData = File.ReadAllText(path); // 경로(파일)안에 그 string 데이터를 전부 받아 넣겠습니다. return하기 위해 지역변수로 담아 선언
 
-        //Data jsonSaveData = JsonUtility.FromJson<Data>(jsonData);
-        Ranking jsonSaveData = JsonMapper.ToObject<Ranking>(jsonData);
+        Ranking jsonSaveData = JsonUtility.FromJson<Ranking>(jsonData);
+        //Ranking jsonSaveData = JsonMapper.ToObject<Ranking>(jsonData);
 
         return jsonSaveData;
     }
@@ -184,5 +193,14 @@ public class DataManager : MonoBehaviour
     {
         Ranking rankingData = LoadFromJson(); // 파일에서 데이터를 로드하거나 초기화합니다.
         return rankingData.Listdata;
+    }
+
+    private void OnDisable()
+    {
+        Debug.LogWarning("OnDisable 실행됨! Start 전에 꺼진다: " + gameObject.name);
+    }
+    private void OnDestroy()
+    {
+        Debug.LogWarning("OnDestroy 실행됨! Start 전에 삭제됨: " + gameObject.name);
     }
 }
