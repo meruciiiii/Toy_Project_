@@ -38,7 +38,12 @@ public enum Charactor
  */
 
 [Serializable]
-public class Data //단판 데이터
+public class Ranking
+{
+    public List<Data> ranking = new List<Data>();
+}
+
+public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
 {
     //캐릭터의 경우 Enum 으로 관리합시다.
     //플레이어 이름 string (키보드 입력 받아서 저장)
@@ -57,32 +62,37 @@ public class Data //단판 데이터
     }
 }
 
-[Serializable]
-public class Ranking
+public class DataManager : MonoBehaviour
 {
-    public List<Data> ranking = new List<Data>();
-}
-
-public class RankingRW : MonoBehaviour
-{
-    private static string path;
     private string filename = "ranking_data.json";
+    private static string path;//파일 저장 경로(파일명까지)
 
     private void Awake()
     {
-        path = Application.persistentDataPath + "tmp.txt";
-        SaveToJson(new Data("",0,0f));
+        path = Path.Combine(Application.persistentDataPath, filename);
+        
+        //path = Application.persistentDataPath + "tmp.txt";
+        
+        //SaveToJson(new Data("",0,0f));
         //SaveToJson(new Data("",Charactor.Song, 0f));
     }
 
-    
-    public static void SaveToJson(Data jsonSaveData)
+    private void Start()
     {
-        // A -> B가는 작업
-        string jsonData = JsonUtility.ToJson(jsonSaveData);
+        if (!File.Exists(path))// path = Path.Combine(Application.persistentDataPath, filename); 파일 명까지의 경로가 없다면
+        {
+            SaveToJson(new Ranking());
+            Debug.Log("랭킹파일 없음. 새로 생성하겠습니다.");
+        }
+    }
+
+    public static void SaveToJson(Ranking jsonSaveData)
+    {
+        string jsonData = JsonMapper.ToJson(jsonSaveData); //랭킹  
 
         // 파일에 저장 Ctrl + S
         File.WriteAllText(path, jsonData);
+        Debug.Log("랭킹 데이터 저장 완료");
     }
 
     public Data LoadFromJson()//시작할때 로드
@@ -94,7 +104,8 @@ public class RankingRW : MonoBehaviour
         string jsonData = File.ReadAllText(path);
 
         // B -> C가는 작업
-        Data jsonSaveData = JsonUtility.FromJson<Data>(jsonData);
+        //Data jsonSaveData = JsonUtility.FromJson<Data>(jsonData);
+        Data jsonSaveData = JsonMapper.ToObject<Data>(jsonData);
 
         return jsonSaveData;
     }
