@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private float playerSpeed = 10f;
+	protected float playerSpeed = 10f;
 
 	[SerializeField] private PlayerInput Input;
 	private Rigidbody player_r;
@@ -23,12 +23,11 @@ public class PlayerController : MonoBehaviour {
 			transform.position.y,
 			Mathf.Clamp(transform.position.z, size.LimitMin.z, size.LimitMax.z)
 			);
-
 	}
 
 	private void Move() {
-		Vector3 playerMovement = new Vector3(Input.playerDirection_x, 0f, Input.playerDirection_z) * playerSpeed * Time.deltaTime;
-
-		player_r.MovePosition(player_r.position + playerMovement);
+		Vector3 playerDirection = new Vector3(Input.playerDirection_x, 0f, Input.playerDirection_z);
+		transform.LookAt(transform.position + playerDirection);
+		player_r.MovePosition(player_r.position + (playerDirection * playerSpeed * Time.deltaTime));
 	}
 }
