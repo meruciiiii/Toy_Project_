@@ -6,8 +6,8 @@ public class AssignmentSpawner : MonoBehaviour
 {
 	[SerializeField] private float spawn_timer = 0.2f;
 	[SerializeField] private MapSize size;
-	[SerializeField] private GameObject assainmentPrefabs;
-	private GameObject assainment;
+	[SerializeField] private GameObject assignmentPrefabs;
+	private GameObject assignment;
 
 	private void OnEnable() {
 		StartCoroutine(Assainment());
@@ -22,11 +22,9 @@ public class AssignmentSpawner : MonoBehaviour
 	}
 	
 	private void spawn_assignment() {
-		assainment = Instantiate(assainmentPrefabs);
-		assainment.transform.position = new Vector3(
-			Random.Range(size.LimitMin.x, size.LimitMax.x),
-			10f,
-			Random.Range(size.LimitMin.z, size.LimitMax.z)
-			);
+		assignment = Instantiate(assignmentPrefabs);
+		Vector3 rnd_pos = Vector3.zero;
+		rnd_pos = new Vector3(Random.Range(size.LimitMin.x, size.LimitMax.x), 10f,Random.Range(size.LimitMin.z, size.LimitMax.z));
+		assignment.transform.position = rnd_pos;
 	}
 }

@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssignmentSpawner
   spawn_timer: 0.2
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
-  assainmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
+  assignmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
 --- !u!4 &407756625
 Transform:
   m_ObjectHideFlags: 0
