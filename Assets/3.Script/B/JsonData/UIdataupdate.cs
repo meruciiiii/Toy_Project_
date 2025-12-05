@@ -28,6 +28,18 @@ public class UIdataupdate : MonoBehaviour
             Debug.LogError("DataManager 인스턴스를 찾을 수 없습니다! 랭킹 업데이트 실패.");
         }
     }
+
+    private void OnEnable()
+    {
+        if (DataManager.instance != null)
+        {
+            DisplayRanking();
+        }
+        else
+        {
+            Debug.LogError("DataManager 인스턴스를 찾을 수 없습니다! 랭킹 업데이트 실패.");
+        }
+    }
     public void DisplayRanking()
     {
         List<Data> ranklist = DataManager.instance.GetRankingList(); //리스트를 받아오고
