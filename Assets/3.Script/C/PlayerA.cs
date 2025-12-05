@@ -49,7 +49,7 @@ public class PlayerA : PlayerController_C
             }
             else
             {
-                // [CASE 2] 평상시 -> 부모의 기본 로직(패널티) 실행
+                // 평상시 -> 부모의 기본 로직(패널티) 실행
                 base.OnCollisionEnter(collision);
             }
         }

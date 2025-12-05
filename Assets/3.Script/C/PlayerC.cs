@@ -40,7 +40,7 @@ public class PlayerC : PlayerController_C
         if (isDrifting)
         {
             Debug.Log("C: 크리티컬 패널티! (휠체어 사고)");
-            // TODO: GameManager에게 2배, 3배 페널티 요청
+            //GameManager에게 2배, 3배 페널티 요청
         }
         else
         {
