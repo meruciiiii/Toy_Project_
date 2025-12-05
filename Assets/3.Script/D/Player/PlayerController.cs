@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour {
 
 	private void FixedUpdate() {
 		Move();
+	}
 
+	private void LateUpdate() {
 		transform.position = new Vector3(
 			Mathf.Clamp(transform.position.x, size.LimitMin.x, size.LimitMax.x),
 			transform.position.y,

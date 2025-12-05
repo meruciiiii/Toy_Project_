@@ -2245,6 +2245,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594051416}
   m_Mesh: {fileID: 4300000, guid: dd0187cdaabbf654d8df9b87b74089f5, type: 3}
+--- !u!114 &671987655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7347505275325422886, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+  m_PrefabInstance: {fileID: 5924875567296809499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478cc495c86a97a47b61e6c048a3a681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
 --- !u!1 &696477394
 GameObject:
   m_ObjectHideFlags: 0
@@ -6740,7 +6751,7 @@ PrefabInstance:
     - target: {fileID: 5055708120967107905, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: Input
       value: 
-      objectReference: {fileID: 8515081303501583103}
+      objectReference: {fileID: 0}
     - target: {fileID: 5070387314443861599, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -6752,7 +6763,7 @@ PrefabInstance:
     - target: {fileID: 5512637569664224281, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8515081303501583103}
+      objectReference: {fileID: 0}
     - target: {fileID: 5512637569664224281, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Event_Movement
@@ -6764,6 +6775,54 @@ PrefabInstance:
     - target: {fileID: 5585306391651696941, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: PC
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
+      value: 0739fe7d-1db9-4e59-9015-84dd5176ca27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
+      value: 'Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 671987655}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Event_Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5783338753275215444, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
@@ -6817,6 +6876,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6567571268761744288, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: size
+      value: 
+      objectReference: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+    - target: {fileID: 6567571268761744288, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: Input
+      value: 
+      objectReference: {fileID: 671987655}
     - target: {fileID: 6620796870592125272, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -6911,17 +6978,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
---- !u!114 &8515081303501583103 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2599359542258448612, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
-  m_PrefabInstance: {fileID: 5924875567296809499}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478cc495c86a97a47b61e6c048a3a681, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

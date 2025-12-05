@@ -38,6 +38,7 @@ public class AssignmentSpawner : MonoBehaviour
 			)) {
 				if(hit.transform.CompareTag("Platform")) {
 					assignment.transform.position = rnd_pos;
+					assignment.transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.up);
 					break;
 				}
 			}
