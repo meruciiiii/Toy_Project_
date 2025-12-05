@@ -17,9 +17,8 @@ public class UIdataupdate : MonoBehaviour
     //    rankChractor = new TextMeshProUGUI[DataManager.instance.Ranking_count];
     //    rankTimeText = new TextMeshProUGUI[DataManager.instance.Ranking_count];
     //}
-    private void OnEnable()
+    private void Start()//Enable로 하지 마라...
     {
-        // 랭킹 화면이 활성화될 때마다 최신 데이터로 업데이트, 게임 오브젝트 활성화 비활성화마다 반영
         if (DataManager.instance != null)
         {
             DisplayRanking();
