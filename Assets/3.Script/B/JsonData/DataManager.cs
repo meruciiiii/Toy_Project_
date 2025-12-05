@@ -53,9 +53,9 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
     
     public string Playername;
     public Charactor charactor;
-    public float cleartime;
+    public int cleartime;
 
-    public Data(string Playername, Charactor charactor, float cleartime)
+    public Data(string Playername, Charactor charactor, int cleartime)
     {
         this.Playername = Playername;
         this.charactor = charactor;
@@ -75,21 +75,39 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
          
         }
      */
+    public Data() { }//생성자
 }
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager instance = null;
+    private static DataManager instancePrivate = null;
 
+    public static DataManager instance
+    {
+        get
+        {
+            // 이 Getter를 통해 외부에서 DataManager.Instance.xxx 형태로 접근합니다.
+            if (instancePrivate == null)
+            {
+                // 인스턴스가 없을 경우 찾아주거나 에러를 로그합니다.
+                instancePrivate = FindObjectOfType<DataManager>();
+                if (instancePrivate == null)
+                {
+                    Debug.LogError("DataManager 인스턴스를 씬에서 찾을 수 없습니다! 씬에 DataManager 컴포넌트를 가진 GameObject가 있는지 확인하세요.");
+                }
+            }
+            return instancePrivate;
+        }
+    }
     //파일 경로체크
     private string filename = "ranking_data.json";
     private static string path;//파일 저장 경로(파일명까지)
 
     private void Awake()
     {
-        if (instance == null)
+        if (instancePrivate == null)
         {
-            instance = this;
+            instancePrivate = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -114,10 +132,12 @@ public class DataManager : MonoBehaviour
             SaveToJson(new Ranking());
             Debug.Log("랭킹파일 없음. 새로 생성.");
         }
+        AddNewRanking(new Data("test", Charactor.Ppipi, UnityEngine.Random.Range(10, 50)));
+        Debug.Log("저장1");
     }
     //파일 경로체크
 
-    public static void SaveToJson(Ranking ranking) //총 랭킹 데이터 저장 메서드
+    public void SaveToJson(Ranking ranking) //총 랭킹 데이터 저장 메서드
     {
         string jsonData = JsonMapper.ToJson(ranking); //랭킹데이터를 제이슨으로 바꾸기 전에 string에 넣어서
 
@@ -130,7 +150,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(path))
         {
             Ranking newRanking = new Ranking();// return하기 위해 따로 지역변수로 담아 선언
-            SaveToJson(newRanking);
+            //SaveToJson(newRanking);
             Debug.Log("랭킹 파일 없음. 새로 생성하고 빈 랭킹 객체 반환");
             return newRanking;
         }
@@ -151,7 +171,7 @@ public class DataManager : MonoBehaviour
     {
         Ranking rankingdata = LoadFromJson(); //Ranking 클래스를 일단 불러오고
         rankingdata.Listdata.Add(newrecord);//그 클래스에 있는 안에 있는 변수(리스트를)에 Data를 먼저 넣고 그 이후에 섞겠습니다. 나중에 저장도 해야됩니다.
-        rankingdata.Listdata.Sort((a, b) => a.cleartime.CompareTo(b.cleartime));//List.Sort 정렬알고리즘 메서드
+        rankingdata.Listdata.Sort((a, b) => b.cleartime.CompareTo(a.cleartime));//List.Sort 정렬알고리즘 메서드
 
         if (rankingdata.Listdata.Count > Ranking_count)
         {
