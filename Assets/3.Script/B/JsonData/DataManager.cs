@@ -153,6 +153,8 @@ public class DataManager : MonoBehaviour
         
         File.WriteAllText(path, jsonData); //경로(파일)안에 그 string 데이터를 전부 적어넣는다.
         Debug.Log("랭킹 데이터 저장 Write 완료");
+
+        //{"Listdata":[{"Playername":"test","charactor":1,"cleartime":45},{"Playername":"test","charactor":1,"cleartime":11}]}
     }
 
     public Ranking LoadFromJson()//총 랭킹 데이터 불러오기 메서드
