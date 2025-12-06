@@ -7,12 +7,14 @@ public class AssignmentController : MonoBehaviour
 {
 	private void OnCollisionEnter(Collision collision) {
 		if(collision.transform.CompareTag("Platform")) {
+			TryGetComponent(out Rigidbody rigid);
+			rigid.AddForce(Vector3.up * 100f);
 			StartCoroutine(deleteSelf());
 		}
 	}
 
 	private IEnumerator deleteSelf() {
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.75f);
 		Destroy(gameObject);
 	}
 }

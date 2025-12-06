@@ -7,7 +7,9 @@ public class AssignmentSpawner : MonoBehaviour
 	[SerializeField] private float spawn_timer = 0.2f;
 	[SerializeField] private MapSize size;
 	[SerializeField] private GameObject assignmentPrefabs;
+	[SerializeField] private GameObject hintPrefabs;
 	private GameObject assignment;
+	private int hint_count = 0;
 
 	private void OnEnable() {
 		StartCoroutine(Assainment());
@@ -16,13 +18,26 @@ public class AssignmentSpawner : MonoBehaviour
 	private IEnumerator Assainment() {
 		WaitForSeconds wfs = new WaitForSeconds(spawn_timer);
 		while(true) {
-			spawn_assignment();
+			spawn_assignment(assignmentPrefabs);
+			yield return wfs;
+		}
+	}
+
+	public void spawn_hint(int hint_count) {
+		this.hint_count = hint_count;
+		StartCoroutine(Hint());
+	}
+
+	private IEnumerator Hint() {
+		WaitForSeconds wfs = new WaitForSeconds(spawn_timer);
+		for(int i = 0; i < hint_count; i++) {
+			spawn_assignment(hintPrefabs);
 			yield return wfs;
 		}
 	}
 	
-	private void spawn_assignment() {
-		assignment = Instantiate(assignmentPrefabs);
+	private void spawn_assignment(GameObject prefabs) {
+		assignment = Instantiate(prefabs);
 		Vector3 rnd_pos = Vector3.zero;
 		int safe = 0;
 		while(safe < 5) {

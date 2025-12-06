@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfb5a3b8bb1f224682d7e810edf2510, type: 3}
   m_Name: MapSize
   m_EditorClassIdentifier: Assembly-CSharp::MapSize
-  _LimitMin: {x: -21, y: 0, z: -19}
-  _LimitMax: {x: 3, y: 0, z: 5}
+  _LimitMin: {x: -21.5, y: 0, z: -19.5}
+  _LimitMax: {x: 3, y: 0, z: 4}

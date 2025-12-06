@@ -32,4 +32,14 @@ public class PlayerController : MonoBehaviour {
 		transform.LookAt(transform.position + playerDirection);
 		player_r.MovePosition(player_r.position + (playerDirection * playerSpeed * Time.deltaTime));
 	}
+
+	private void OnCollisionEnter(Collision collision) {
+		if(collision.transform.CompareTag("item")) {
+			Skill();
+		}
+	}
+
+	protected virtual void Skill() {
+
+	}
 }
