@@ -11,6 +11,10 @@ public class AssignmentController : MonoBehaviour
 			rigid.AddForce(Vector3.up * 100f);
 			StartCoroutine(deleteSelf());
 		}
+		else if (collision.transform.CompareTag("Player")) {
+			Destroy(gameObject);
+			//시간 늘어나는 시스템 구현
+		}
 	}
 
 	private IEnumerator deleteSelf() {

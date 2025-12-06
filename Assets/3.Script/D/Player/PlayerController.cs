@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] private MapSize size;
 
-	private void Awake() {
+	protected virtual void Awake() {
 		TryGetComponent(out player_r);
 	}
 
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void LateUpdate() {
+		player_r.linearVelocity = Vector3.zero;
 		transform.position = new Vector3(
 			Mathf.Clamp(transform.position.x, size.LimitMin.x, size.LimitMax.x),
 			transform.position.y,
@@ -34,12 +35,11 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	protected virtual void OnCollisionEnter(Collision collision) {
-		//if(collision.transform.CompareTag("item")) {
-		//	Skill();
-		//}
+	protected virtual void OnTriggerEnter(Collider other) {
+		if (other.transform.CompareTag("Item")) {
+			Skill();
+		}
 	}
-
 	protected virtual void Skill() {
 
 	}

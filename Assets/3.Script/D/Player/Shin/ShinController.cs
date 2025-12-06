@@ -6,7 +6,7 @@ public class ShinController : PlayerController
 {
     
     [Header("C 스킬 설정")]
-    public float boostSpeed = 20f; // 스킬 시 이동 속도
+    public float boostSpeed = 13f; // 스킬 시 이동 속도
     public float skillDuration = 5f;
     private bool isDrifting = false; // 스킬 사용 중 여부
     private float RotateSpeed = 180f;
@@ -46,10 +46,10 @@ public class ShinController : PlayerController
 	protected override void OnCollisionEnter(Collision collision) {
 		if (isDrifting)
         {
-            if(collision.transform.CompareTag("Obstacle")) {
-                Debug.Log("C: 크리티컬 패널티! (휠체어 사고)");
-                //GameManager에게 2배, 3배 페널티 요청
-			}
+   //         if(collision.transform.CompareTag("Obstacle")) {
+   //             Debug.Log("C: 크리티컬 패널티! (휠체어 사고)");
+   //             //GameManager에게 2배, 3배 페널티 요청
+			//}
         } else {
             base.OnCollisionEnter(collision);
 		}
