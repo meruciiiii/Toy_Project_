@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	protected float playerSpeed = 10f;
 
-	[SerializeField] private PlayerInput Input;
-	private Rigidbody player_r;
+	[SerializeField] protected PlayerInput Input;
+	protected Rigidbody player_r;
 
 	[SerializeField] private MapSize size;
 
@@ -27,16 +27,17 @@ public class PlayerController : MonoBehaviour {
 			);
 	}
 
-	private void Move() {
+	protected virtual void Move() {
 		Vector3 playerDirection = new Vector3(Input.playerDirection_x, 0f, Input.playerDirection_z);
 		transform.LookAt(transform.position + playerDirection);
 		player_r.MovePosition(player_r.position + (playerDirection * playerSpeed * Time.deltaTime));
+
 	}
 
-	private void OnCollisionEnter(Collision collision) {
-		if(collision.transform.CompareTag("item")) {
-			Skill();
-		}
+	protected virtual void OnCollisionEnter(Collision collision) {
+		//if(collision.transform.CompareTag("item")) {
+		//	Skill();
+		//}
 	}
 
 	protected virtual void Skill() {

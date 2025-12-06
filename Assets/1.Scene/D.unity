@@ -1353,6 +1353,7 @@ MonoBehaviour:
   spawn_timer: 0.2
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
+  hintPrefabs: {fileID: 0}
 --- !u!1 &267988644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,7 +1471,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7347505275325422886, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
   m_PrefabInstance: {fileID: 463639762}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 463639763}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 478cc495c86a97a47b61e6c048a3a681, type: 3}
@@ -1949,6 +1950,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679195422802907447, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_DefaultControlScheme
       value: PC
       objectReference: {fileID: 0}
@@ -2048,6 +2053,10 @@ PrefabInstance:
       propertyPath: Input
       value: 
       objectReference: {fileID: 270698046}
+    - target: {fileID: 6567571268761744288, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6732963249913750009, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2140,6 +2149,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8300218222136759927, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 8318527768415628439, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2159,8 +2172,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1547935882347506940, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 463639764}
   m_SourcePrefab: {fileID: 100100000, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+--- !u!1 &463639763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547935882347506940, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+  m_PrefabInstance: {fileID: 463639762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &463639764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463639763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a034f19c5c21914abbe79f36425f606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShinController
+  Input: {fileID: 270698046}
+  size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+  boostSpeed: 20
+  skillDuration: 5
 --- !u!1 &472932489
 GameObject:
   m_ObjectHideFlags: 0
