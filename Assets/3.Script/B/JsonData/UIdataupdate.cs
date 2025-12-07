@@ -33,7 +33,7 @@ public class UIdataupdate : MonoBehaviour
                 Data curRank = ranklist[i]; //리스트 안쪽 3개 인수만큼 text 반영
                 rankNameText[i].text = "Name        : " + curRank.Playername;
                 rankChractor[i].text = "Chractor    : " + curRank.charactor.ToString();
-                rankTimeText[i].text = "Coding score : " + curRank.cleartime.ToString();
+                rankTimeText[i].text = "Coding score : " + curRank.Score.ToString();
             }
             else
             {

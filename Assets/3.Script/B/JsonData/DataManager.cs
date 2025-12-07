@@ -52,13 +52,13 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
 
     public string Playername;
     public Charactor charactor;
-    public int cleartime;
+    public int Score;
 
-    public Data(string Playername, Charactor charactor, int cleartime)
+    public Data(string Playername, Charactor charactor, int Score)
     {
         this.Playername = Playername;
         this.charactor = charactor;
-        this.cleartime = cleartime;
+        this.Score = Score;
     }
     /*
      string nameInput = "플레이어이름";
@@ -183,7 +183,7 @@ public class DataManager : MonoBehaviour
         Ranking rankingdata = LoadFromJson(); //Ranking 클래스에 json데이터를 일단 불러와서 Ranking 형에 맞춰 변수(공간)안에 넣고
         rankingdata.Listdata.Add(newrecord); //List에 Add.
         //그 클래스에 있는 안에 있는 변수(리스트)에 Data를 먼저 넣고 그 이후에 섞겠습니다. 나중에 저장도 해야됩니다.
-        rankingdata.Listdata.Sort((a, b) => b.cleartime.CompareTo(a.cleartime));//List.Sort 정렬알고리즘 메서드, 오름차순
+        rankingdata.Listdata.Sort((a, b) => b.Score.CompareTo(a.Score));//List.Sort 정렬알고리즘 메서드, 오름차순
 
         if (rankingdata.Listdata.Count > Ranking_count)
         {

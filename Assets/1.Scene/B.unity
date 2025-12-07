@@ -1715,7 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74149067a67d41a44884ba6c83de0edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spin
-  rotationSpeed: 3
+  rotationSpeed: 50
 --- !u!1 &661670413
 GameObject:
   m_ObjectHideFlags: 0
