@@ -66,113 +66,122 @@ public class UI_CamarMove : MonoBehaviour
     */
 
 
-    /*2차 이동로직(transform)
-    //[Header("Camera 이동")]
-    //[SerializeField] private GameObject camera_ob;
-    //[SerializeField] private Transform cameraStartTransform;      // 시작 위치
-    //[SerializeField] private Transform camaraTargetTransform;     // 목표 위치
-    //[SerializeField] private float moveSpeed;      // 이동 속도
-    //[SerializeField] private float rotationSpeed;      // 회전 속도
-    //private bool moveCamera = false;
-    //
-    //[SerializeField] private GameObject currentUIGroup; // 현재 보여주는 UI 그룹
-    //[SerializeField] private GameObject nextUIGroup;    // 다음에 보여줄 UI 그룹
-    //
-    //// 화면 전환과 버튼에 넣을 메서드 public
-    //public void SwitchUIWithCamera()
-    //{
-    //    // UI 이동 중에는 현재 UI 숨기기
-    //    if (currentUIGroup != null)
-    //        currentUIGroup.SetActive(false);
-    //
-    //    // 배경 이동 시작
-    //    StartCoroutine(MoveCameraRoutine());
-    //
-    //    // 이동 완료후 UI 전환 코루틴 시작
-    //    StartCoroutine(WaitForBgAndShowUI());
-    //}
-    //
-    //private IEnumerator MoveCameraRoutine()
-    //{
-    //    if (moveCamera) yield break;
-    //
-    //    moveCamera = true; // 이동 시작 (WaitForBgAndShowUI를 위해)
-    //
-    //    camera_ob.transform.position = cameraStartTransform.position;
-    //    camera_ob.transform.rotation = cameraStartTransform.rotation;
-    //
-    //    while (Vector3.Distance(camera_ob.transform.position, camaraTargetTransform.position) > 0.2f)
-    //    {
-    //        //camera_ob.transform.position = Vector3.MoveTowards(
-    //        //    camera_ob.transform.position,
-    //        //    camaraTargetTransform.position,
-    //        //    moveSpeed * Time.deltaTime);
-    //        //
-    //        //moveSpeed -= 0.00005f;
-    //
-    //        camera_ob.transform.position = Vector3.Lerp(
-    //        camera_ob.transform.position,
-    //        camaraTargetTransform.position,
-    //        moveSpeed * Time.deltaTime); // Lerp로 인해 감속 효과가 발생합니다. Vector용
-    //        ///비율 보간 이동
-    //
-    //        yield return null; // 위치 이동 루프
-    //    }
-    //
-    //    // 위치 스냅 (오차 제거)
-    //    camera_ob.transform.position = camaraTargetTransform.position;
-    //
-    //    // 2단계: 회전 이동 (Position 이동 완료 후 Rotation만 이동)
-    //    // 회전 이동 완료 시점까지 루프 실행
-    //    // Quaternion.Angle을 사용하여 두 회전 사이의 각도를 체크
-    //    while (Quaternion.Angle(camera_ob.transform.rotation, camaraTargetTransform.rotation) > 0.3f)
-    //    {
-    //        //camera_ob.transform.rotation = Quaternion.RotateTowards(
-    //        //    camera_ob.transform.rotation,
-    //        //    camaraTargetTransform.rotation,
-    //        //    rotationSpeed * Time.deltaTime);
-    //        //
-    //        //moveSpeed -= 0.00005f;
-    //        camera_ob.transform.rotation = Quaternion.Slerp(
-    //        camera_ob.transform.rotation,
-    //        camaraTargetTransform.rotation,
-    //        rotationSpeed * Time.deltaTime);// Slerp로 인해 감속 효과가 발생합니다. Quaternion 용
-    //        //비율 보간 이동
-    //
-    //        yield return null; // 회전 이동 루프
-    //    }
-    //
-    //    // 회전 스냅 (오차 제거)
-    //    camera_ob.transform.rotation = camaraTargetTransform.rotation;
-    //
-    //    Vector3 tempPos = cameraStartTransform.position;
-    //    Quaternion tempRot = cameraStartTransform.rotation;
-    //
-    //    cameraStartTransform.position = camaraTargetTransform.position;
-    //    cameraStartTransform.rotation = camaraTargetTransform.rotation;
-    //
-    //    camaraTargetTransform.position = tempPos;
-    //    camaraTargetTransform.rotation = tempRot;
-    //
-    //    moveCamera = false; // 이동 종료
-    //}
-    //
-    //// UI 전환 대기 코루틴
-    //private IEnumerator WaitForBgAndShowUI()
-    //{
-    //    // 카메라 이동이 끝날 때까지 기다림 (MoveCameraRoutine이 moveCamera를 false로 만들 때까지)
-    //    while (moveCamera)
-    //        yield return null;
-    //
-    //    // 이동 완료 후 다음 UI 보여주기
-    //    if (nextUIGroup != null)
-    //        nextUIGroup.SetActive(true);
-    //    GameObject temp = currentUIGroup;
-    //    currentUIGroup = nextUIGroup;
-    //    nextUIGroup = temp;//재사용 하기 위해 ui 교체, position 교체와 동일.
-    //    Debug.Log("대기및 ui교체");
-    //}
-    */
+    //2차 이동로직(transform)
+    [Header("Camera 이동")]
+    [SerializeField] private GameObject camera_ob;
+    [SerializeField] private Transform cameraStartTransform;      // 시작 위치
+    [SerializeField] private Transform camaraTargetTransform;     // 목표 위치
+    [SerializeField] private float moveSpeed;      // 이동 속도
+    [SerializeField] private float rotationSpeed;      // 회전 속도
+    private bool moveCamera = false;
+    
+    [SerializeField] private GameObject currentUIGroup; // 현재 보여주는 UI 그룹
+    [SerializeField] private GameObject nextUIGroup;    // 다음에 보여줄 UI 그룹
+
+    private void Start()
+    {
+        // 카메라 위치/회전을 cameraStartTransform의 값으로 즉시 변경
+        camera_ob.transform.position = cameraStartTransform.position;
+        camera_ob.transform.rotation = cameraStartTransform.rotation;
+
+        Debug.Log("카메라가 시작 위치로 즉시 설정되었습니다.");
+    }
+
+    // 화면 전환과 버튼에 넣을 메서드 public
+    public void SwitchUIWithCamera()
+    {
+        // UI 이동 중에는 현재 UI 숨기기
+        if (currentUIGroup != null)
+            currentUIGroup.SetActive(false);
+    
+        // 배경 이동 시작
+        StartCoroutine(MoveCameraRoutine());
+    
+        // 이동 완료후 UI 전환 코루틴 시작
+        StartCoroutine(WaitForBgAndShowUI());
+    }
+    
+    private IEnumerator MoveCameraRoutine()
+    {
+        if (moveCamera) yield break;
+    
+        moveCamera = true; // 이동 시작 (WaitForBgAndShowUI를 위해)
+    
+        camera_ob.transform.position = cameraStartTransform.position;
+        camera_ob.transform.rotation = cameraStartTransform.rotation;
+    
+        while (Vector3.Distance(camera_ob.transform.position, camaraTargetTransform.position) > 0.2f)
+        {
+            //camera_ob.transform.position = Vector3.MoveTowards(
+            //    camera_ob.transform.position,
+            //    camaraTargetTransform.position,
+            //    moveSpeed * Time.deltaTime);
+            //
+            //moveSpeed -= 0.00005f;
+    
+            camera_ob.transform.position = Vector3.Lerp(
+            camera_ob.transform.position,
+            camaraTargetTransform.position,
+            moveSpeed * Time.deltaTime); // Lerp로 인해 감속 효과가 발생합니다. Vector용
+            ///비율 보간 이동
+    
+            yield return null; // 위치 이동 루프
+        }
+    
+        // 위치 스냅 (오차 제거)
+        camera_ob.transform.position = camaraTargetTransform.position;
+    
+        // 2단계: 회전 이동 (Position 이동 완료 후 Rotation만 이동)
+        // 회전 이동 완료 시점까지 루프 실행
+        // Quaternion.Angle을 사용하여 두 회전 사이의 각도를 체크
+        while (Quaternion.Angle(camera_ob.transform.rotation, camaraTargetTransform.rotation) > 0.3f)
+        {
+            //camera_ob.transform.rotation = Quaternion.RotateTowards(
+            //    camera_ob.transform.rotation,
+            //    camaraTargetTransform.rotation,
+            //    rotationSpeed * Time.deltaTime);
+            //
+            //moveSpeed -= 0.00005f;
+            camera_ob.transform.rotation = Quaternion.Slerp(
+            camera_ob.transform.rotation,
+            camaraTargetTransform.rotation,
+            rotationSpeed * Time.deltaTime);// Slerp로 인해 감속 효과가 발생합니다. Quaternion 용
+            //비율 보간 이동
+    
+            yield return null; // 회전 이동 루프
+        }
+    
+        // 회전 스냅 (오차 제거)
+        camera_ob.transform.rotation = camaraTargetTransform.rotation;
+    
+        Vector3 tempPos = cameraStartTransform.position;
+        Quaternion tempRot = cameraStartTransform.rotation;
+    
+        cameraStartTransform.position = camaraTargetTransform.position;
+        cameraStartTransform.rotation = camaraTargetTransform.rotation;
+    
+        camaraTargetTransform.position = tempPos;
+        camaraTargetTransform.rotation = tempRot;
+    
+        moveCamera = false; // 이동 종료
+    }
+    
+    // UI 전환 대기 코루틴
+    private IEnumerator WaitForBgAndShowUI()
+    {
+        // 카메라 이동이 끝날 때까지 기다림 (MoveCameraRoutine이 moveCamera를 false로 만들 때까지)
+        while (moveCamera)
+            yield return null;
+    
+        // 이동 완료 후 다음 UI 보여주기
+        if (nextUIGroup != null)
+            nextUIGroup.SetActive(true);
+        GameObject temp = currentUIGroup;
+        currentUIGroup = nextUIGroup;
+        nextUIGroup = temp;//재사용 하기 위해 ui 교체, position 교체와 동일.
+        Debug.Log("대기및 ui교체");
+    }
+    
 
     //기존 Update로직
     //private void Update()//배경 이동루틴
