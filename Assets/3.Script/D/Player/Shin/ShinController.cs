@@ -17,8 +17,13 @@ public class ShinController : PlayerController
     }
 
     protected override void Move() {
+        //A,D 키를 누르면 회전값을 변경합니다.
         float turn = Input.playerDirection_z * RotateSpeed * Time.deltaTime;
+
+        //변경된 회전값을 바라봅니다.
         player_r.rotation = player_r.rotation * Quaternion.Euler(0, turn, 0);
+
+        //Shin 캐릭터를 앞으로 꾸준히 이동시킵니다.
         player_r.MovePosition(player_r.position + (transform.forward * playerSpeed * Time.deltaTime));
     }
 
@@ -43,15 +48,12 @@ public class ShinController : PlayerController
 
         Debug.Log("C: 스킬 종료");
     }
-	protected override void OnCollisionEnter(Collision collision) {
+	protected override void OnTriggerEnter(Collider collision) { 
 		if (isDrifting)
         {
-   //         if(collision.transform.CompareTag("Obstacle")) {
-   //             Debug.Log("C: 크리티컬 패널티! (휠체어 사고)");
-   //             //GameManager에게 2배, 3배 페널티 요청
-			//}
+            //스킬 사용중 부딫혔을 경우, 조금 더 많은 시간 추가.
         } else {
-            base.OnCollisionEnter(collision);
+            base.OnTriggerEnter(collision);
 		}
 	}
 }
