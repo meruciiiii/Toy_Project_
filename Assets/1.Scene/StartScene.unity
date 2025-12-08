@@ -3026,7 +3026,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1391600875}
         m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
         m_MethodName: SwitchUIObject
         m_Mode: 1
@@ -3665,7 +3665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1391600875}
         m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -5645,7 +5645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1391600875}
         m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
         m_MethodName: SwitchUIObject
         m_Mode: 1
