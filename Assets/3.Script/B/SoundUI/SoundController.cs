@@ -9,6 +9,9 @@ public class SoundController : MonoBehaviour
 
     public void ControllVolume(string audioGroup)
     {
+        float volumeValue = 0f;
+        string parameter = "";
+
         switch (audioGroup)
         {
             case "BGM":
