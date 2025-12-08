@@ -13,13 +13,13 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     private float GAME_OVER_TIME_MINUTES;// 슬라이드 (MAX)
 
     [Header("1초에 흐르는 시간")]
-    public float timeScaleFactor = 10.0f; //1초에 10분 증가//나중에 시간 배율 변경(재호님)
+    public float timeScaleFactor = 10.0f; //1초에 10분 증가
 
     private float currentGameTimeMinutes; // 슬라이드 밸류값(현재 value)
 
     private int score = 0;
     [Header("1초에 늘어나는 점수")]
-    public float scorePerSecond = 10;  // 1초당 증가할 점수//나중에 점수 배율 변경(재호님)
+    public int scorePerSecond = 10;  // 1초당 증가할 점수//나중에 점수 배율 변경(재호님)
     private float scoreAccumulator = 0f; // 미세한 소수점 점수를 누적할 변수 (float) Time.deltaTime 이녀석이 float임
     private Coroutine scoreCoroutine;   // 코루틴 참조를 저장할 변수
 
@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 currentGameTimeMinutes = Finish_Time_MINUTES;
                 ToggleScore();
                 isRunning = false;
-                SceneManager.LoadScene(""); // 게임 오버 씬 string을 넣어주세요
+                SceneManager.LoadScene("GameOverScene"); // 게임 오버 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }
 
@@ -101,7 +101,7 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 ToggleScore();
                 isRunning = false;
                 SaveScore(); // 점수 저장
-                SceneManager.LoadScene(""); // 랭킹 씬 string을 넣어주세요
+                SceneManager.LoadScene("GameClearScene"); // 랭킹 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }
 
@@ -147,12 +147,12 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     {
         if (On_Skill)
         {
-            scorePerSecond = 20;
+            scorePerSecond *= 2;
             Debug.Log("SinSkill_On!!");
         }
         else
         {
-            scorePerSecond = 10;
+            scorePerSecond /= 2;
             Debug.Log("SinSkill_Off!!");
         }
     }
