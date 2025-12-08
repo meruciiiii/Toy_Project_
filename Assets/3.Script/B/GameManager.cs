@@ -1,0 +1,41 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        player_chractor = 0;//none
+    }
+
+    public Charactor player_chractor;
+    public string Playername = "";
+    public int FinalScore;
+    public bool isGameOver = false; //게임 오버의 경우 GameManager에서 관리?
+
+
+    public void SetFinalScore(int score)
+    {
+        FinalScore = score;
+    }
+
+    public void ResetScore()
+    {
+        FinalScore = 0;
+    }
+
+    //플레이어 이름 입력및 저장 GameManager.instance.Playername = string 입력 받는거
+}

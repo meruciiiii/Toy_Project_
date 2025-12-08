@@ -12,30 +12,6 @@ public enum Charactor
     Sin, //2
     Byon //3
 }
-/* Enum 사용방법
-  다른 스크립트에서 사용할때 이런 느낌으로 사용하시면 될것 같습니다.
- public class GameManager : MonoBehaviour
-{
-    // 1. Enum 타입의 변수 선언
-    public CharacterType selectedCharacter;
-
-    // 2. Enum을 매개변수로 받는 메서드 정의
-    public void SelectNewCharacter(CharacterType characterToSelect)
-    {
-        selectedCharacter = characterToSelect;
-        Debug.Log($"선택된 캐릭터: {selectedCharacter}");
-    }
-
-    private void Start()
-    {
-        // 3. Enum 값을 직접 사용
-        selectedCharacter = CharacterType.Song;
-
-        // 4. 함수 호출 시 Enum 값 전달
-        SelectNewCharacter(CharacterType.Byon); 
-    }
-}
- */
 
 [Serializable]
 public class Ranking //데이터를 여기 안에 담겠습니다.
@@ -60,20 +36,7 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
         this.charactor = charactor;
         this.Score = Score;
     }
-    /*
-     string nameInput = "플레이어이름";
-     Charactor selectedChar = Charactor.Ppipi;
-     float finalTime = 45.8f; //최종 시간
 
-     Data 객체 생성 시, 생성자에 각각 전달
-     Data newRecord = new Data(nameInput, selectedChar, finalTime);  
-     DataManager의 AddNewRanking(Data newRecord); 로 넣고 랭킹 섞어야 됩니다.
-    이후로는 UI에 리스트 넣고 반복문 이중 포문등으로 Text를 돌려버리면 OK
-    for(int i = 0, i<Ranking.jsonSaveData.Count,i++) // 3번 반복
-        {
-         
-        }
-     */
     public Data() { }//LitJson을 사용하는 경우, 역직렬화 시 객체를 생성하기 위해 기본 생성자가 필요, 
     /*
      Ranking 객체가 생성된 후, JsonMapper는 그 안에 있는 필드인 Listdata (List<Data> 타입)를 채우기 시작합니다.
@@ -88,41 +51,15 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
 
 public class DataManager : MonoBehaviour
 {
-    private static DataManager instancePrivate = null;
-
-    public static DataManager instance
-    {
-        get
-        {
-            // 이 Getter를 통해 외부에서 DataManager.Instance.xxx 형태로 접근합니다.
-            if (instancePrivate == null)
-            {
-                instancePrivate = FindAnyObjectByType<DataManager>();//FindObjectOfType<DataManager>(); 쓰지마라...
-                if (instancePrivate == null)
-                {
-                    Debug.LogError("DataManager 인스턴스를 씬에서 찾을 수 없습니다.");
-                }
-            }
-            return instancePrivate;
-        }
-    }
-    //파일 경로체크
+    public static DataManager instance;
+    
     private string filename = "ranking_data.json";
     private static string path;//파일 저장 경로(파일명까지)
 
     private void Awake()
     {
-        Debug.Log("Awake 실행됨: " + gameObject.name);
-        if (instancePrivate != null&& instancePrivate != this)
-        {
-            Destroy(gameObject);
-        }
-        else if(instancePrivate == null)
-        {
-            instancePrivate = this;
-            DontDestroyOnLoad(gameObject);
-            path = Path.Combine(Application.persistentDataPath, filename);//파일경로에 파일이름을 합쳐서 string화
-        }
+        instance = this;
+        path = Path.Combine(Application.persistentDataPath, filename);//파일경로에 파일이름을 합쳐서 string화
         
         //persistentDataPath 경로
         //C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
@@ -141,7 +78,7 @@ public class DataManager : MonoBehaviour
             SaveToJson(new Ranking());
             Debug.Log("랭킹파일 없음. 새로 생성.");
         }
-        AddNewRanking(new Data("test", Charactor.Ppipi, UnityEngine.Random.Range(10, 50)));//랭킹 추가 방식. 나중에 게임 종료시 사용
+        AddNewRanking(new Data(GameManager.instance.Playername, GameManager.instance.player_chractor,GameManager.instance.FinalScore));//랭킹 추가 방식. 나중에 게임 종료시 사용
         Debug.Log("랭킹 저장!");
     }
 
@@ -191,7 +128,7 @@ public class DataManager : MonoBehaviour
         int n = rankingdata.Listdata.Count;//만약 기존4개의 데이터가 전부 채워져 있다면. 5개로 현재 위에서 ADD로 늘었을겁니다.
                                            //적으면 그냥 해도 됌.
 
-        // 버블 정렬 시작 (점수 내림차순, 동점 시 안정성 유지) **
+        // 버블 정렬 시작 (점수 내림차순, 동점 시 안정성 유지)
         for (int i = 0; i < n - 1; i++)
         //리스트의 카운트 만큼 데이터를 정렬하려면 최대 n-1 번의 순회만으로
         //가장 큰 요소가 제자리를 찾게 됌. (예: 5개 데이터는 4번의 순회로 충분)
@@ -217,16 +154,7 @@ public class DataManager : MonoBehaviour
             rankingdata.Listdata.RemoveAt(Ranking_count);//4위 이후는 지워버리겠습니다.
                                                          //세상은 랭커가 아니면 기억을 해주지 않아...
         }
+
         SaveToJson(rankingdata);//바꾸는걸로 끝내지 말고 WriteAllText로 저장.
     }
-    
-    /*
-    public List<Data> GetRankingList() //밖으로 데이터 빼고 싶을때.
-    {
-        Ranking rankingData = LoadFromJson(); // 파일에서 데이터를 로드하거나 초기화합니다.
-        return rankingData.Listdata;
-    }
-    List<Data> ranklist = DataManager.instance.LoadFromJson().Listdata; 
-    //UIdataupdate에서 메서드 쓰고 있었는데 이걸로 줄여서 변경.
-    */
 }
