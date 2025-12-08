@@ -26,8 +26,14 @@ public class PauseUIChange : MonoBehaviour
     }
     public void gotoStartScene()
     {
+        StartCoroutine(gotoStartScene_co());
+    }
+
+    IEnumerator gotoStartScene_co()
+    {
         audio.Play();
-        Debug.Log("gotoStartScene Ç®±â");
+        Debug.Log("gotoStartScene");
+        yield return new WaitForSeconds(0.68f);
         Time.timeScale = 1;
         GameManager.instance.isPause = false;
         pauseUI_ob.SetActive(false);
