@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemController : MonoBehaviour
@@ -5,11 +8,13 @@ public class ItemController : MonoBehaviour
 	[SerializeField] private float rotation_speed = 100f;
 	[SerializeField] private float sin_speed = 1f;
 	[SerializeField] private float sin_range = 0.5f;
+	[SerializeField] private float despawn_timer = 10f;
 	private Vector3 item_pos;
 	private Vector3 temp_pos;
 	
 	private void OnEnable() {
 		item_pos = transform.position;
+		StartCoroutine("despawn_item");
 	}
 
 	private void Update() {
@@ -27,7 +32,13 @@ public class ItemController : MonoBehaviour
 	private void OnTriggerEnter(Collider collision) {
 		if(collision.transform.CompareTag("Player")) {
 			Debug.Log("플레이어와 아이템 충돌");
+			StopCoroutine("despawn_item");
 			Destroy(gameObject);
 		}
+	}
+
+	private IEnumerator despawn_item() {
+		yield return new WaitForSeconds(despawn_timer);
+		Destroy(gameObject);
 	}
 }
