@@ -114,7 +114,7 @@ public class DataManager : MonoBehaviour
     }
 
     // 랭킹 반영 로직
-    public int Ranking_count = 3; //4위까지만 기록하겠습니다.
+    public int Ranking_count = 3; //3위까지만 기록하겠습니다.
     public void AddNewRanking(Data newrecord) //플레이 Data를 랭킹에 추가하고 자동으로 지우는 메서드
     {
         Ranking rankingdata = LoadFromJson(); //Ranking 클래스에 json데이터를 일단 불러와서 Ranking 형에 맞춰 변수(공간)안에 넣고
