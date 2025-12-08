@@ -1211,7 +1211,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 255322485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SetPlayerCharactor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SceneLoader
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &255322485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2868,8 +2892,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1627308614}
-        m_TargetAssemblyTypeName: UIprototype, Assembly-CSharp
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
         m_MethodName: SwitchUIObject
         m_Mode: 1
         m_Arguments:
@@ -3210,7 +3234,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 628386073}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SetPlayerCharactor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SceneLoader
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &628386073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5330,7 +5378,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1627308614}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIprototype, Assembly-CSharp
         m_MethodName: SwitchUIObject
         m_Mode: 1
@@ -7423,9 +7471,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1627308615}
   - component: {fileID: 1627308613}
-  - component: {fileID: 1627308614}
+  - component: {fileID: 1627308616}
+  - component: {fileID: 1627308617}
   m_Layer: 5
-  m_Name: UISoundController
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7447,20 +7496,6 @@ MonoBehaviour:
   sliders:
   - {fileID: 1467495973}
   - {fileID: 1953718892}
---- !u!114 &1627308614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627308612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18f7fbb1d547b684792e19eb7a077cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIprototype
-  currentUIObject: {fileID: 1971691277}
-  nextUIObject: {fileID: 1944590526}
 --- !u!224 &1627308615
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7480,6 +7515,36 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1627308616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627308612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f7fbb1d547b684792e19eb7a077cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_Botton_change
+  currentUIObject: {fileID: 1971691277}
+  nextUIObject: {fileID: 1944590526}
+--- !u!114 &1627308617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627308612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f520e888c42a0c46851c93616809b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  player_chractor: 0
+  Playername: 
+  FinalScore: 0
+  isGameOver: 0
 --- !u!1 &1630126357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8667,7 +8732,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2090232038}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SetPlayerCharactor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1627308616}
+        m_TargetAssemblyTypeName: UI_Botton_change, Assembly-CSharp
+        m_MethodName: SceneLoader
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2090232038
 MonoBehaviour:
   m_ObjectHideFlags: 0
