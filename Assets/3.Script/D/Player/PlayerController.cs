@@ -25,9 +25,6 @@ public class PlayerController : MonoBehaviour
 	private Color originalColor = Color.white;
 	private Coroutine visualCoroutine;
 
-	[Tooltip("충돌 시 지연될 시간 (분 단위) - ScoreManager가 분 단위를 쓴다면 정수형 확인 필요")]
-	[SerializeField] protected int hitPenaltyMinutes = 30; // 30분 지연 예시
-
 	protected virtual void Awake()
 	{
 		TryGetComponent(out player_r);
@@ -86,7 +83,7 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.transform.CompareTag("Debuff"))
         {
-			spawner.spawn_assignment_from_debuff(10);
+
         }
 		else if (other.transform.CompareTag("Obstacle"))
 		{
@@ -95,14 +92,15 @@ public class PlayerController : MonoBehaviour
 	}
 	protected virtual void OnHitObstacle(GameObject obstacle)
 	{
-		if (ScoreManager.instance != null)
-		{
-			// ScoreManager의 OnHit은 Finish_Time_MINUTES를 증가시킵니다. [ScoreManager.cs 참조]
-			ScoreManager.instance.OnHit(hitPenaltyMinutes);
-		}
+		// 1. 게임매니저에게 패널티 부과 요청
+		//if (GameManager.Instance != null)
+		//{
+		//	GameManager.Instance.AddPenaltyTime(hitPenaltyTime);
+		//}
 
+		// 2. 충돌한 과제 오브젝트 삭제 (또는 비활성화)
+		// 충돌 후에도 오브젝트가 남아있으면 계속 충돌 판정이 날 수 있으므로 처리 필요
 		obstacle.SetActive(false);
-		ScoreManager.instance.OnHit(25);
 		Debug.Log("과제랑 충돌 퇴근시간 지연");
 	}
 	protected virtual void Skill()
