@@ -163,7 +163,10 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
         if (remainingMinutes > 0)
         {
-            int bonusScore = remainingMinutes * 50; //남은 시간 배율 보너스
+            int bonusScore = remainingMinutes * 10; //남은 시간 배율 보너스
+            int scoretemp = score;
+            PlayerPrefs.SetInt("bouns", bonusScore);
+            PlayerPrefs.SetInt("baseScore", scoretemp);
             score += bonusScore;
             Debug.Log($"클리어 보너스: 여유분 {remainingMinutes}분 * 50 = {bonusScore}점 추가!");
         }
