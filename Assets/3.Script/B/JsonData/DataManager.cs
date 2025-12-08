@@ -52,13 +52,13 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
 
     public string Playername;
     public Charactor charactor;
-    public int cleartime;
+    public int Score;
 
-    public Data(string Playername, Charactor charactor, int cleartime)
+    public Data(string Playername, Charactor charactor, int Score)
     {
         this.Playername = Playername;
         this.charactor = charactor;
-        this.cleartime = cleartime;
+        this.Score = Score;
     }
     /*
      string nameInput = "플레이어이름";
@@ -183,19 +183,50 @@ public class DataManager : MonoBehaviour
         Ranking rankingdata = LoadFromJson(); //Ranking 클래스에 json데이터를 일단 불러와서 Ranking 형에 맞춰 변수(공간)안에 넣고
         rankingdata.Listdata.Add(newrecord); //List에 Add.
         //그 클래스에 있는 안에 있는 변수(리스트)에 Data를 먼저 넣고 그 이후에 섞겠습니다. 나중에 저장도 해야됩니다.
-        rankingdata.Listdata.Sort((a, b) => b.cleartime.CompareTo(a.cleartime));//List.Sort 정렬알고리즘 메서드, 오름차순
+        //rankingdata.Listdata.Sort((a, b) => b.Score.CompareTo(a.Score));//List.Sort 정렬알고리즘 메서드, 오름차순
+        //20251207 검토해봤을때 불안정 정렬이기 때문에(선생님도 List의 Sort() 메서드는 대부분 안쓴다고 하셨던게 기억났습니다.)
 
-        if (rankingdata.Listdata.Count > Ranking_count)
+        //안정 정렬인 버블정렬 구현으로 해결하겠습니다. 랭킹 데이터 수가 적은 편이여서 시간복잡도 부분에선 그래도 괜찮을 겁니다.
+
+        int n = rankingdata.Listdata.Count;//만약 기존4개의 데이터가 전부 채워져 있다면. 5개로 현재 위에서 ADD로 늘었을겁니다.
+                                           //적으면 그냥 해도 됌.
+
+        // 버블 정렬 시작 (점수 내림차순, 동점 시 안정성 유지) **
+        for (int i = 0; i < n - 1; i++)
+        //리스트의 카운트 만큼 데이터를 정렬하려면 최대 n-1 번의 순회만으로
+        //가장 큰 요소가 제자리를 찾게 됌. (예: 5개 데이터는 4번의 순회로 충분)
+        {
+            for (int j = 0; j < n - 1 - i; j++)
+            //현재 비교를 시작할 인덱스 j
+            {
+                Data a = rankingdata.Listdata[j];
+                Data b = rankingdata.Listdata[j + 1];
+
+                if (a.Score < b.Score) //Score가 클 때만 바꾸기 때문에 동점이면 안바꿈!!
+                {
+                    // 스왑 (자리 바꿈)
+                    Data temp = rankingdata.Listdata[j]; //지역변수 temp로 빠져!!
+                    rankingdata.Listdata[j] = rankingdata.Listdata[j + 1];
+                    rankingdata.Listdata[j + 1] = temp;
+                }
+            }
+        }
+
+        if (rankingdata.Listdata.Count > Ranking_count)//5개?면 쳐내
         {
             rankingdata.Listdata.RemoveAt(Ranking_count);//4위 이후는 지워버리겠습니다.
+                                                         //세상은 랭커가 아니면 기억을 해주지 않아...
         }
         SaveToJson(rankingdata);//바꾸는걸로 끝내지 말고 WriteAllText로 저장.
     }
-
-    //public List<Data> GetRankingList() //밖으로 데이터 빼고 싶을때.
-    //{
-    //    Ranking rankingData = LoadFromJson(); // 파일에서 데이터를 로드하거나 초기화합니다.
-    //    return rankingData.Listdata;
-    //}//List<Data> ranklist = DataManager.instance.LoadFromJson().Listdata; 
+    
+    /*
+    public List<Data> GetRankingList() //밖으로 데이터 빼고 싶을때.
+    {
+        Ranking rankingData = LoadFromJson(); // 파일에서 데이터를 로드하거나 초기화합니다.
+        return rankingData.Listdata;
+    }
+    List<Data> ranklist = DataManager.instance.LoadFromJson().Listdata; 
     //UIdataupdate에서 메서드 쓰고 있었는데 이걸로 줄여서 변경.
+    */
 }
