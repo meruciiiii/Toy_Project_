@@ -2,22 +2,40 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // 점수를 UI Text에 표시하려면 필요
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 {
+    public static ScoreManager instance;
+
+    private const int START_TIME_MINUTES = 9 * 60 + 30;     // 9:30 AM (570분)
+    private const int GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
+    //18:00 pm 1080
+
+    public float timeScaleFactor = 10.0f; //1초에 10분 증가//나중에 시간 배율 변경(재호님)
+
+    private float currentGameTimeMinutes;
+
     [Header("점수 설정")]
     public int score = 0;
-    public float scorePerSecond = 10;  // 1초당 증가할 점수
+    public float scorePerSecond = 10;  // 1초당 증가할 점수//나중에 점수 배율 변경(재호님)
     private float scoreAccumulator = 0f; // 미세한 소수점 점수를 누적할 변수 (float) Time.deltaTime 이녀석이 float임
     private Coroutine scoreCoroutine;   // 코루틴 참조를 저장할 변수
 
     [Header("UI 연결 ")]//현재 미작업
     public Text scoreText; // 점수를 표시할 UI Text 컴포넌트
+    public Text timeText;
 
     private bool isRunning = false;
+
+    private void Awake()
+    {
+        currentGameTimeMinutes = START_TIME_MINUTES;
+    }
 
     // 점수 증가 코루틴 시작/정지
     public void ToggleScore()
     {
+        if (GameManager.instance.isGameOver) return;
+
         if (!isRunning)
         {
             // 코루틴이 실행 중이 아닐 때 시작
@@ -28,11 +46,7 @@ public class ScoreManager : MonoBehaviour
         {
             // 코루틴이 실행 중일 때 정지
             StopCoroutine(scoreCoroutine);
-            isRunning = false;
             Debug.Log("점수 증가 정지");
-
-            SaveScore();
-            Debug.Log("점수 증가 정지 및 저장 완료");
         }
     }
 
@@ -41,8 +55,7 @@ public class ScoreManager : MonoBehaviour
     {
         isRunning = true;
 
-        // isRunning이 true인 동안 계속 반복합니다.
-        while (isRunning)
+        while (isRunning && !GameManager.instance.isGameOver)
         {
             // 1. 미세한 점수를 float 변수에 누적
             scoreAccumulator += scorePerSecond * Time.deltaTime;
@@ -55,14 +68,32 @@ public class ScoreManager : MonoBehaviour
                 scoreAccumulator -= pointsToAdd; // 누적 변수에서 정수만큼 빼고 소수점만 남김
             }
 
-            // 3. UI 업데이트
+            currentGameTimeMinutes += Time.deltaTime * timeScaleFactor;
+
+            // 3. 게임 오버 조건 체크 (22:00 도달)
+            if (currentGameTimeMinutes >= GAME_OVER_TIME_MINUTES)
+            {
+                SaveScore(); // 점수 저장
+                GameManager.instance.isGameOver = true; // GameManager에 게임 오버 알림
+                yield break; // 코루틴 즉시 종료
+            }
+
+            // 4. UI 업데이트
             if (scoreText != null)
             {
                 scoreText.text = "Score: " + score; // 정수 score만 표시
             }
 
+            if (timeText != null)
+            {
+                // 분을 시:분 형태로 변환하여 표시
+                int hours = (int)currentGameTimeMinutes / 60;
+                int minutes = (int)currentGameTimeMinutes % 60;
+                timeText.text = $"Time: {hours:00}:{minutes:00}"; // 00:00 형식 포맷팅
+            }
             yield return null;
         }
+        isRunning = false;
     }
 
     private void SaveScore()
