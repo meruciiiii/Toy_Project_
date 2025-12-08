@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour {
 		TryGetComponent(out player_r);
 	}
 
+	private void OnEnable() {
+		transform.position = new Vector3(-9f, 0f, -8f);
+	}
+
 	private void FixedUpdate() {
 		Move();
 	}

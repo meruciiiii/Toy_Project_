@@ -10,7 +10,7 @@ public class AssignmentSpawner : MonoBehaviour {
 	private int hint_count = 0;
 
 	private GameObject[] pooling;
-	private int pool_count = 15;
+	[SerializeField] private int pool_count = 15;
 	private int currnet_pool = 0;
 
 	private void Awake() {
@@ -79,8 +79,8 @@ public class AssignmentSpawner : MonoBehaviour {
 				Quaternion.identity,
 				10f
 			)) {
-				//만약 부딫힌 오브젝트의 태그가 Platform일 경우, Assignment 위치 변경 후 while 반복문을 탈출합니다.
-				if (hit.transform.CompareTag("Platform")) {
+				//만약 부딫힌 오브젝트의 태그가 Obstacle가 아닐 경우, Assignment 위치 변경 후 while 반복문을 탈출합니다.
+				if (!hit.transform.CompareTag("Obstacle")) {
 					falling_object.SetActive(true);
 					falling_object.transform.position = rnd_pos;
 
