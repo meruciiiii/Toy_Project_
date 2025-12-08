@@ -2037,7 +2037,7 @@ GameObject:
   - component: {fileID: 392987140}
   - component: {fileID: 392987139}
   m_Layer: 0
-  m_Name: testsound
+  m_Name: Bgm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2054,7 +2054,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8299791560053313066, guid: 11c4d47ec1bb4904d99c72b5a3f11cdc, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e11e9fcafeae39a48bc776d490c9a8e0, type: 3}
+  m_Resource: {fileID: 8300000, guid: f8b95a40193e6c145b9bb899d64a97d9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
