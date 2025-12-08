@@ -6,7 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    
+    public bool isPause;
+
     private void Awake()
     {
         if (instance == null)
