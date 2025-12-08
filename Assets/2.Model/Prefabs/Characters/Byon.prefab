@@ -2958,7 +2958,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ByonController
   Input: {fileID: 5119400665687567495}
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+  assignmentSpawnner: {fileID: 2300013769440007643, guid: c07cb76bd7cd9444085876da25fda472, type: 3}
+  playerRenderers: []
   skillDuration: 5
+  hintBonusTime: 2
+  hintSpawnCount: 5
 --- !u!1 &8372826866646605958
 GameObject:
   m_ObjectHideFlags: 0

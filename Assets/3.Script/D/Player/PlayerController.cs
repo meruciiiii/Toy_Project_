@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 		// 2. 충돌한 과제 오브젝트 삭제 (또는 비활성화)
 		// 충돌 후에도 오브젝트가 남아있으면 계속 충돌 판정이 날 수 있으므로 처리 필요
 		obstacle.SetActive(false);
+		ScoreManager.instance.OnHit(25);
 		Debug.Log("과제랑 충돌 퇴근시간 지연");
 	}
 	protected virtual void Skill()

@@ -958,6 +958,7 @@ MonoBehaviour:
   Ppipi_ob: {fileID: 1130087567}
   Sin_ob: {fileID: 1859309669290099054}
   Byon_ob: {fileID: 894753660}
+  isRankingScene: 0
 --- !u!4 &682420383
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,7 +1863,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130087567}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
   m_Controller: {fileID: 9100000, guid: 9a8dfd5d9f811ff46b76b1ec1bf1e138, type: 2}
   m_CullingMode: 0
@@ -3720,7 +3721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1945682825835633623
 GameObject:
   m_ObjectHideFlags: 0

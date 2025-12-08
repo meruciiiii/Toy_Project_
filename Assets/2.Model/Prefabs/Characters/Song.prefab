@@ -256,6 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongController
   Input: {fileID: 6727723301016830825}
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+  assignmentSpawnner: {fileID: 2300013769440007643, guid: c07cb76bd7cd9444085876da25fda472, type: 3}
+  playerRenderers: []
   skillDuration: 4
 --- !u!1 &776055540762757733
 GameObject:
