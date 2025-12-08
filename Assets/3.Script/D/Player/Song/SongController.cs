@@ -42,12 +42,15 @@ public class SongController : PlayerController {
         if (isInvincible)
         {
             // [무적 상태]
+            int destroyScore = 50;
+
+            if (ScoreManager.instance != null)
+            {
+                ScoreManager.instance.SkillAddScore(destroyScore);
+            }
+
             Debug.Log($"A: 과제 격파! (점수 획득)");
 
-            // 점수 추가 로직 (예시)
-            // if (GameManager.Instance != null) GameManager.Instance.AddScore(100);
-
-            // 여기도 Destroy 대신 비활성화로 변경해야 합니다.
             obstacle.SetActive(false);
         }
         else

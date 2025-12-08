@@ -98,6 +98,7 @@ public class AssignmentSpawner : MonoBehaviour {
 		for(int i = 0; i < count; i++) {
 			GameObject assignment_debuff = Instantiate(assignment_debuff_Prefabs);
 			spawn_rnd(assignment_debuff);
+			Debug.Log("¹ÎÂùÂ¯");
 		}
 	}
 

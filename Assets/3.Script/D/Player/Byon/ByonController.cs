@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ByonController : PlayerController {
+public class ByonController : PlayerController
+{
 
     [Header("B 스킬 설정")]
     public float skillDuration = 5f;
@@ -10,12 +11,14 @@ public class ByonController : PlayerController {
     [SerializeField] private float hintBonusTime = 2.0f;
     [SerializeField] private int hintSpawnCount = 5;
 
-    protected override void Skill() {
+    protected override void Skill()
+    {
         StopCoroutine("TeacherChanceRoutine");
         StartCoroutine("TeacherChanceRoutine");
     }
 
-    IEnumerator TeacherChanceRoutine() {
+    IEnumerator TeacherChanceRoutine()
+    {
         Debug.Log("B: 선생님 찬스 ON (과제만 느려짐)");
 
         StartSkillVisual(Color.blue, skillDuration);
@@ -35,7 +38,8 @@ public class ByonController : PlayerController {
         // FindObjectsSortMode.None : 정렬 안 함 (가장 빠름)
         //var activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
 
-        foreach (GameObject assignment in spawner.pooling) {
+        foreach (GameObject assignment in spawner.pooling)
+        {
             assignment.TryGetComponent(out AssignmentController assignmentController);
             assignmentController.SetSlowMode(true);
         }
@@ -48,7 +52,8 @@ public class ByonController : PlayerController {
         // 5. 화면에 있는 과제들 다시 원래 속도로 복구
         // 여기도 마찬가지로 최신 API 사용
         //activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
-        foreach (GameObject assignment in spawner.pooling) {
+        foreach (GameObject assignment in spawner.pooling)
+        {
             assignment.TryGetComponent(out AssignmentController assignmentController);
             assignmentController.SetSlowMode(false);
         }
@@ -61,17 +66,14 @@ public class ByonController : PlayerController {
         // 힌트 아이템 태그가 "Hint"라고 가정 (프리팹 설정 필요)
         if (other.CompareTag("Hint"))
         {
-            // 1. 게임 매니저를 통해 시간 단축
-            //if (GameManager.Instance != null)
-            //{
-              //  GameManager.Instance.ReduceTime(hintBonusTime);
-            //}
+            int hintScore = 60; // 힌트 획득 점수
 
-            // 2. 힌트 아이템 삭제
-            // Hint는 풀링이 아닌 Instantiate로 생성되므로 Destroy로 삭제합니다.
-            // (AssignmentSpawner.cs의 spawn_hint 메서드 확인 결과)
-            Destroy(other.gameObject);
-            Debug.Log("힌트 획득 퇴근 시간 앞당겨짐");
+            // ScoreManager를 통해 점수 획득
+            if (ScoreManager.instance != null)
+            {
+                ScoreManager.instance.SkillAddScore(hintScore);
+                Destroy(other.gameObject);
+            }
         }
     }
 }

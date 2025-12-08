@@ -46,16 +46,38 @@ public class ShinController : PlayerController
         float originalSpeed = playerSpeed;
         playerSpeed = boostSpeed;
 
-        // GameManager에게 게임 시간 배속 요청
-        // GameManager.Instance.time??
+        // [ScoreManager 연동 1] 패시브 점수 2배 혜택 켜기
+        if (ScoreManager.instance != null)
+        {
+            ScoreManager.instance.SinSkill(true);
+        }
+
+        float elapsedTime = 0f;
+        int driftBonusScore = 5; // 0.1초당 추가 보너스 점수
+
+        while (elapsedTime < skillDuration)
+        {
+            elapsedTime += 0.1f;
+
+            // 폭주하는 맛을 위해 점수를 계속 넣어줍니다.
+            if (ScoreManager.instance != null)
+            {
+                ScoreManager.instance.SkillAddScore(driftBonusScore);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
 
         yield return new WaitForSeconds(skillDuration);
 
         // 원상 복구
         playerSpeed = originalSpeed;
         isDrifting = false;
-        // GameManager.Instance.SetTimeMultiplier(1.0f);
-
+        
+        if (ScoreManager.instance != null)
+        {
+            ScoreManager.instance.SinSkill(false);
+        }
         Debug.Log("C: 스킬 종료");
     }
 	protected override void OnTriggerEnter(Collider collision) { 
