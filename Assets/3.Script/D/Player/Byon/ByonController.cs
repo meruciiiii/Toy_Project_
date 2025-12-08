@@ -23,7 +23,7 @@ public class ByonController : PlayerController {
         Debug.Log("B: 선생님 찬스 ON (과제만 느려짐)");
 
         // 1. 앞으로 생성될 과제들을 위해 스포너에게 알림
-        if (spawner != null) spawner.SetSlowMode(true);
+        if (spawner != null) spawner.DelaySpawn(skillDuration);
 
         // 2. [Unity 6 변경점] 현재 화면에 있는 모든 과제 찾기
         // FindObjectsOfType -> FindObjectsByType
@@ -37,7 +37,7 @@ public class ByonController : PlayerController {
         yield return new WaitForSeconds(skillDuration);
 
         // 4. 스킬 종료: 스포너 원상 복구
-        if (spawner != null) spawner.SetSlowMode(false);
+        // 자동적으로 5초뒤 다시 스폰될거임.
 
         // 5. 화면에 있는 과제들 다시 원래 속도로 복구
         // 여기도 마찬가지로 최신 API 사용

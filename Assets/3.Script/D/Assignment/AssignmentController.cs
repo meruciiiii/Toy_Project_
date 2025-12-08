@@ -24,7 +24,7 @@ public class AssignmentController : MonoBehaviour {
 
 	private IEnumerator deleteSelf() {
 		yield return new WaitForSeconds(0.75f);
-		Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 	public void SetSlowMode(bool isSlow) {
 		if (assignment_r == null) return;
