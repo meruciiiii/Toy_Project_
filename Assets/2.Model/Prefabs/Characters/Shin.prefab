@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 5679195422802907447}
   - component: {fileID: 7347505275325422886}
   - component: {fileID: -6896722652966758209}
+  - component: {fileID: -6632191410681357537}
   m_Layer: 0
   m_Name: Shin
   m_TagString: Player
@@ -848,8 +849,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShinController
   Input: {fileID: 7347505275325422886}
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+  skillTimer: {fileID: 0}
   boostSpeed: 13
   skillDuration: 5
+--- !u!114 &-6632191410681357537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547935882347506940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f33e5aefa91d240950166711fde9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillTimerUI
+  fillImage: {fileID: 0}
+  uiCanvas: {fileID: 0}
 --- !u!1 &1699746235529682816
 GameObject:
   m_ObjectHideFlags: 0
