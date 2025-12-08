@@ -6,6 +6,8 @@ public class ByonController : PlayerController {
 
     [Header("B 스킬 설정")]
     public float skillDuration = 5f;
+    [Tooltip("힌트 아이템 획득 시 단축될 시간(초)")]
+    [SerializeField] private float hintBonusTime = 2.0f;
 
     private AssignmentSpawner spawner;
 
@@ -16,7 +18,8 @@ public class ByonController : PlayerController {
     }
 
     protected override void Skill() {
-        StartCoroutine(TeacherChanceRoutine());
+        StopCoroutine("TeacherChanceRoutine");
+        StartCoroutine("TeacherChanceRoutine");
     }
 
     IEnumerator TeacherChanceRoutine() {
