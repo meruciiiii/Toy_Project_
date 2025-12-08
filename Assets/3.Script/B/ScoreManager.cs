@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // 점수를 UI Text에 표시하려면 필요
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 {
     public static ScoreManager instance;
 
-    private const int START_TIME_MINUTES = 9 * 60 + 30;     // 9:30 AM (570분)
-    private const int GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
-    //18:00 pm 1080
+    private int START_TIME_MINUTES;
+    private int Finish_Time_MINUTES;
+    private int GAME_OVER_TIME_MINUTES;
 
     public float timeScaleFactor = 10.0f; //1초에 10분 증가//나중에 시간 배율 변경(재호님)
 
@@ -28,14 +29,21 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     private void Awake()
     {
-        currentGameTimeMinutes = START_TIME_MINUTES;
+       instance = this;
+       START_TIME_MINUTES = 9 * 60 + 30;     // 9:30 AM (570분)
+       Finish_Time_MINUTES = 18 * 60;       //18:00 pm (1080분)
+       GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
+       currentGameTimeMinutes = START_TIME_MINUTES;
+    }
+
+    private void Start()
+    {
+        ToggleScore();
     }
 
     // 점수 증가 코루틴 시작/정지
     public void ToggleScore()
     {
-        if (GameManager.instance.isGameOver) return;
-
         if (!isRunning)
         {
             // 코루틴이 실행 중이 아닐 때 시작
@@ -55,7 +63,7 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     {
         isRunning = true;
 
-        while (isRunning && !GameManager.instance.isGameOver)
+        while (isRunning)
         {
             // 1. 미세한 점수를 float 변수에 누적
             scoreAccumulator += scorePerSecond * Time.deltaTime;
@@ -70,11 +78,17 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
             currentGameTimeMinutes += Time.deltaTime * timeScaleFactor;
 
-            // 3. 게임 오버 조건 체크 (22:00 도달)
-            if (currentGameTimeMinutes >= GAME_OVER_TIME_MINUTES)
+            // 3. 게임 종료 조건 체크 (22:00 도달)
+            if (Finish_Time_MINUTES <= currentGameTimeMinutes)
             {
                 SaveScore(); // 점수 저장
-                GameManager.instance.isGameOver = true; // GameManager에 게임 오버 알림
+                SceneManager.LoadScene(""); // 랭킹 씬 string을 넣어주세요
+                yield break; // 코루틴 즉시 종료
+            }
+            else if (Finish_Time_MINUTES >= GAME_OVER_TIME_MINUTES)
+            {
+                SaveScore(); // 점수 저장
+                SceneManager.LoadScene(""); // 게임 오버 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }
 
@@ -89,11 +103,36 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 // 분을 시:분 형태로 변환하여 표시
                 int hours = (int)currentGameTimeMinutes / 60;
                 int minutes = (int)currentGameTimeMinutes % 60;
-                timeText.text = $"Time: {hours:00}:{minutes:00}"; // 00:00 형식 포맷팅
+                timeText.text = $"Time: {hours}:{minutes}"; // 00:00 형식 포맷팅
             }
             yield return null;
         }
         isRunning = false;
+    }
+
+    public void SkillAddScore(int score)
+    {
+        this.score += score;
+    }
+
+    public void OnHit(int damage)
+    {
+        Finish_Time_MINUTES += damage;
+        Debug.Log($"피해 발생! 클리어 목표 시간이 {Finish_Time_MINUTES}로 늦춰졌습니다.");
+    }
+
+    public void SinSkill(bool On_Skill)
+    {
+        if (On_Skill)
+        {
+            timeScaleFactor = 20.0f;
+            scorePerSecond = 20;
+        }
+        else
+        {
+            timeScaleFactor = 10.0f;
+            scorePerSecond = 10;
+        }
     }
 
     private void SaveScore()

@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour
     public Charactor player_chractor;
     public string Playername = "";
     public int FinalScore;
-    public bool isGameOver = false; //게임 오버의 경우 GameManager에서 관리?
-
 
     public void SetFinalScore(int score)
     {
