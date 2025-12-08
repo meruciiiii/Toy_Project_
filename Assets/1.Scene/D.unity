@@ -5399,6 +5399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shin
       objectReference: {fileID: 0}
+    - target: {fileID: 1547935882347506940, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7517280491790367202, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.73585

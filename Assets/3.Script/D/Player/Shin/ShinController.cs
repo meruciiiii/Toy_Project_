@@ -11,7 +11,12 @@ public class ShinController : PlayerController
     private bool isDrifting = false; // 스킬 사용 중 여부
     private float RotateSpeed = 180f;
 
-    protected override void Skill()
+	protected override void Awake() {
+        TryGetComponent(out player_r);
+        transform.position = new Vector3(-9f, 0.45f, -8f);
+    }
+
+	protected override void Skill()
     {
         StartCoroutine(Wheelchair());
     }
