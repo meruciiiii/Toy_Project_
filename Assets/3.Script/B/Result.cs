@@ -8,6 +8,7 @@ public class Result : MonoBehaviour
     public TMPro.TextMeshProUGUI bonus;
     public TMPro.TextMeshProUGUI basescore;
     public TMPro.TextMeshProUGUI result;
+    public TMPro.TextMeshProUGUI checkoutTime;
 
     private void Start()//Enable로 하지 마라...
     {
@@ -19,6 +20,12 @@ public class Result : MonoBehaviour
         bonus.text = "" + PlayerPrefs.GetInt("bouns");
         basescore.text = "" + PlayerPrefs.GetInt("baseScore");
         result.text = "" + GameManager.instance.FinalScore;
-        
+        int cleartime = GameManager.instance.ClearTimeMinutes;
+        int hour = cleartime / 60;
+        int minute = cleartime % 60;
+        if (checkoutTime != null)
+        {
+            checkoutTime.text = $"{hour:00}:{minute:00}";
+        }
     }
 }
