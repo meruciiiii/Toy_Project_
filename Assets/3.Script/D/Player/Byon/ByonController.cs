@@ -10,16 +10,6 @@ public class ByonController : PlayerController {
     [SerializeField] private float hintBonusTime = 2.0f;
     [SerializeField] private int hintSpawnCount = 5;
 
-    [SerializeField] private GameObject assignmentSpawner;
-
-    private AssignmentSpawner spawner;
-
-    protected override void Awake() {
-        base.Awake();
-        // 씬에서 스포너 미리 찾기 (민찬님 스크립트)
-        assignmentSpawner.TryGetComponent(out spawner);
-    }
-
     protected override void Skill() {
         StopCoroutine("TeacherChanceRoutine");
         StartCoroutine("TeacherChanceRoutine");

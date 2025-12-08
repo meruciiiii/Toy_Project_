@@ -6,15 +6,17 @@ public class ItemSpawner : MonoBehaviour
 {
 	[SerializeField] GameObject Item1Prefabs;
 	[SerializeField] GameObject Item2Prefabs;
+	[SerializeField] GameObject Item3Prefabs;
 	[SerializeField] MapSize size;
 	[SerializeField] float Item_Spawn_Timer = 15f;
-	private GameObject[] ItemPrefabses;
+	private GameObject[] ItemList;
 
 	private void OnEnable() {
 		StartCoroutine("Item");
-		ItemPrefabses = new GameObject[2];
-		ItemPrefabses[0] = Item1Prefabs;
-		ItemPrefabses[1] = Item2Prefabs;
+		ItemList = new GameObject[3];
+		ItemList[0] = Item1Prefabs;
+		ItemList[1] = Item2Prefabs;
+		ItemList[2] = Item3Prefabs;
 	}
 
 	private IEnumerator Item() {
@@ -27,8 +29,8 @@ public class ItemSpawner : MonoBehaviour
 
 	private void spawn_item() {
 		Vector3 rnd_pos = new Vector3(Random.Range(size.LimitMin.x, size.LimitMax.x), 1f, Random.Range(size.LimitMin.z, size.LimitMax.z));
-		int rnd_int = Random.Range(0, 2);
+		int rnd_int = Random.Range(0, 3);
 		Debug.Log(rnd_int);
-		Instantiate(ItemPrefabses[rnd_int], rnd_pos, Quaternion.identity);
+		Instantiate(ItemList[rnd_int], rnd_pos, Quaternion.identity);
 	}
 }

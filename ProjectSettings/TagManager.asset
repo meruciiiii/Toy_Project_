@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Obstacle
   - Hint
+  - Debuff
   layers:
   - Default
   - TransparentFX

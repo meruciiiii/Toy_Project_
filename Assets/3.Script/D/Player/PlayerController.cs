@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] private MapSize size;
 
+	[SerializeField] protected GameObject assignmentSpawner;
+	protected AssignmentSpawner spawner;
+
 	protected virtual void Awake()
 	{
 		TryGetComponent(out player_r);
+        assignmentSpawner.TryGetComponent(out spawner);
 		transform.position = new Vector3(-9f, 0.2f, -8f);
 	}
 
@@ -47,6 +51,10 @@ public class PlayerController : MonoBehaviour {
 		if (other.transform.CompareTag("Item")) {
 			Skill();
 		}
+		else if(other.transform.CompareTag("Debuff")) {
+			spawner.spawn_assignment_from_debuff(5);
+		}
+
 		else if (other.transform.CompareTag("Obstacle"))
 		{
 			OnHitObstacle(other.gameObject);

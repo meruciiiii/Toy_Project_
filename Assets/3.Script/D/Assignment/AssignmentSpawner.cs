@@ -6,15 +6,17 @@ public class AssignmentSpawner : MonoBehaviour {
 	[SerializeField] public float spawn_timer = 0.2f;
 	[SerializeField] private MapSize size;
 	[SerializeField] private GameObject assignmentPrefabs;
+	[SerializeField] private GameObject assignment_debuff_Prefabs;
 	[SerializeField] private GameObject hintPrefabs;	
 	private int hint_count = 0;
 
 	public GameObject[] pooling;
 	[SerializeField] private int pool_count = 15;
-	private int currnet_pool = 1;
+	private int currnet_pool = 0;
 
 	private void Awake() {
 		pooling = new GameObject[pool_count];
+
 		for (int i = 0; i < pool_count; i++) {
 			pooling[i] = Instantiate(assignmentPrefabs);
 			pooling[i].SetActive(false);
@@ -28,8 +30,8 @@ public class AssignmentSpawner : MonoBehaviour {
 	private IEnumerator Assaignment() {
 		WaitForSeconds wfs = new WaitForSeconds(spawn_timer);
 		while (true) {
-			spawn_assignment(assignmentPrefabs);
 			yield return wfs;
+			spawn_assignment(assignmentPrefabs);
 		}
 	}
 
@@ -51,7 +53,7 @@ public class AssignmentSpawner : MonoBehaviour {
 		GameObject assignment = pooling[currnet_pool];
 		currnet_pool++;
 		if (currnet_pool >= pool_count) {
-			currnet_pool = 1;
+			currnet_pool = 0;
 		}
 		spawn_rnd(assignment);
 	}
@@ -89,6 +91,13 @@ public class AssignmentSpawner : MonoBehaviour {
 					break;
 				}
 			}
+		}
+	}
+
+	public void spawn_assignment_from_debuff(int count) {
+		for(int i = 0; i < count; i++) {
+			GameObject assignment_debuff = Instantiate(assignment_debuff_Prefabs);
+			spawn_rnd(assignment_debuff);
 		}
 	}
 
