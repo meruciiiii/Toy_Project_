@@ -10,6 +10,7 @@ public class AssignmentSpawner : MonoBehaviour
 	[SerializeField] private GameObject hintPrefabs;
 	private GameObject assignment;
 	private int hint_count = 0;
+	private bool isSlowMode = false;
 
 	private void OnEnable() {
 		StartCoroutine(Assainment());
@@ -67,6 +68,19 @@ public class AssignmentSpawner : MonoBehaviour
 					break;
 				}
 			}
+		}
+	}
+
+	public void SetSlowMode(bool active) {
+		isSlowMode = active;
+	}
+	private void spawn_assignment() {
+		assignment = Instantiate(assignmentPrefabs);
+
+		// [추가] 생성되자마자 슬로우 모드 적용 여부 확인
+		if (isSlowMode) {
+			var controller = assignment.GetComponent<AssignmentController>();
+			if (controller != null) controller.SetSlowMode(true);
 		}
 	}
 }

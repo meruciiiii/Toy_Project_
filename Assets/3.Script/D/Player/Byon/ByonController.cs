@@ -1,44 +1,50 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class ByonController : PlayerController
-{
-    /*
+public class ByonController : PlayerController {
+
     [Header("B 스킬 설정")]
     public float skillDuration = 5f;
-    public float slowMultiplier = 0.5f; // 속도 절반
 
     private AssignmentSpawner spawner;
 
-    protected override void Awake()
-    {
+    protected override void Awake() {
         base.Awake();
         // 씬에서 스포너 미리 찾기 (민찬님 스크립트)
-        spawner = FindObjectOfType<AssignmentSpawner>();
+        spawner = Object.FindFirstObjectByType<AssignmentSpawner>();
     }
 
-    protected override void UseSkill()
-    {
+    protected override void Skill() {
         StartCoroutine(TeacherChanceRoutine());
     }
 
-    IEnumerator TeacherChanceRoutine()
-    {
-        Debug.Log("B: 선생님 찬스 ON (힌트+슬로우)");
+    IEnumerator TeacherChanceRoutine() {
+        Debug.Log("B: 선생님 찬스 ON (과제만 느려짐)");
 
-        if (spawner != null)
-        {
-            // 힌트 섞기
-            // 천천히 떨어뜨리기
+        // 1. 앞으로 생성될 과제들을 위해 스포너에게 알림
+        if (spawner != null) spawner.SetSlowMode(true);
+
+        // 2. [Unity 6 변경점] 현재 화면에 있는 모든 과제 찾기
+        // FindObjectsOfType -> FindObjectsByType
+        // FindObjectsSortMode.None : 정렬 안 함 (가장 빠름)
+        var activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
+
+        foreach (var assignment in activeAssignments) {
+            assignment.SetSlowMode(true);
         }
-
+        // 3. 지속 시간 대기
         yield return new WaitForSeconds(skillDuration);
 
-        if (spawner != null)
-        {
-            // 다시 과제물로 원상복귀
-            // 속도 원상 복구
+        // 4. 스킬 종료: 스포너 원상 복구
+        if (spawner != null) spawner.SetSlowMode(false);
+
+        // 5. 화면에 있는 과제들 다시 원래 속도로 복구
+        // 여기도 마찬가지로 최신 API 사용
+        activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
+        foreach (var assignment in activeAssignments) {
+            assignment.SetSlowMode(false);
         }
         Debug.Log("B: 선생님 찬스 OFF");
     }
-    */
 }

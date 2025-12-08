@@ -2810,11 +2810,11 @@ GameObject:
   - component: {fileID: 8685767690676687620}
   - component: {fileID: 7669866584429332861}
   - component: {fileID: 4572235152418435644}
-  - component: {fileID: 1571838634118934094}
   - component: {fileID: 5119400665687567495}
+  - component: {fileID: -2297491550832352907}
   m_Layer: 0
   m_Name: Byon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2850,7 +2850,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2912,7 +2912,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5119400665687567495}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: Event_Movement
         m_Mode: 0
@@ -2931,20 +2931,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1571838634118934094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356616362162210903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56c0e1c996e4a1c40b533f3b3acfb5e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  Input: {fileID: 0}
-  size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
 --- !u!114 &5119400665687567495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2958,6 +2944,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
   playerDirection: {x: 0, y: 0}
+--- !u!114 &-2297491550832352907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356616362162210903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e62f93229e4794d810ae7c3ec1d92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ByonController
+  Input: {fileID: 5119400665687567495}
+  size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
+  skillDuration: 5
 --- !u!1 &8372826866646605958
 GameObject:
   m_ObjectHideFlags: 0
