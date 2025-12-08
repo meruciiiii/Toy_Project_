@@ -78,8 +78,6 @@ public class DataManager : MonoBehaviour
             SaveToJson(new Ranking());
             Debug.Log("랭킹파일 없음. 새로 생성.");
         }
-        AddNewRanking(new Data(GameManager.instance.Playername, GameManager.instance.player_chractor,GameManager.instance.FinalScore));//랭킹 추가 방식. 나중에 게임 종료시 사용
-        Debug.Log("랭킹 저장!");
     }
 
     //파일 경로체크

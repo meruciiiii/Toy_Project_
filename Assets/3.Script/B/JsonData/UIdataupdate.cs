@@ -11,7 +11,7 @@ public class UIdataupdate : MonoBehaviour
     public TMPro.TextMeshProUGUI[] rankChractor;
     public TMPro.TextMeshProUGUI[] rankTimeText;
 
-    private void Start()//Enable로 하지 마라...
+    private void OnEnable()//Enable로 하지 마라...
     {
         if (DataManager.instance != null)
         {
@@ -31,16 +31,16 @@ public class UIdataupdate : MonoBehaviour
             if (i<ranklist.Count)
             {
                 Data curRank = ranklist[i]; //리스트 안쪽 3개 인수만큼 text 반영
-                rankNameText[i].text = "Name        : " + curRank.Playername;
-                rankChractor[i].text = "Chractor    : " + curRank.charactor.ToString();
-                rankTimeText[i].text = "Coding score : " + curRank.Score.ToString();
+                rankNameText[i].text = "" + curRank.Playername;
+                rankChractor[i].text = "" + curRank.charactor.ToString();
+                rankTimeText[i].text = "" + curRank.Score.ToString();
             }
             else
             {
                 // 데이터가 없는 순위는 공백 처리
-                rankNameText[i].text = "Name        : null";
-                rankChractor[i].text = "Chractor    : null";
-                rankTimeText[i].text = "Coding score : null";
+                rankNameText[i].text = "null";
+                rankChractor[i].text = "null";
+                rankTimeText[i].text = "null";
             }
         }
     }

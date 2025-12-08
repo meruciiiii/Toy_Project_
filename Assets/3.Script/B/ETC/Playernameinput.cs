@@ -10,6 +10,9 @@ public class Playernameinput : MonoBehaviour
     [Header("name_input")]
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private Button confirmbutton;
+    [SerializeField] private GameObject Ui_update;
+    [SerializeField] private GameObject cur_Ui;
+    [SerializeField] private GameObject next_Ui;
 
     private void Start()
     {
@@ -41,5 +44,12 @@ public class Playernameinput : MonoBehaviour
         // 최종 이름 확정 및 GameManager에 저장
         GameManager.instance.Playername = finalName;
         Debug.Log($"플레이어 이름이 '{finalName}'(으)로 확정");
+
+        DataManager.instance.AddNewRanking(new Data(GameManager.instance.Playername, GameManager.instance.player_chractor, GameManager.instance.FinalScore));
+        Debug.Log("랭킹 저장!");
+
+        Ui_update.SetActive(true);//OnEnable
+        cur_Ui.SetActive(false);
+        next_Ui.SetActive(true);
     }
 }
