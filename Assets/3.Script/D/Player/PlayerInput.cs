@@ -12,33 +12,24 @@ public class PlayerInput : MonoBehaviour {
 
 	[SerializeField] private Animator playerAnimator;
 
-	private void Awake()
-	{
-		// 이 스크립트가 붙어있는 GameObject에서 Animator 컴포넌트를 찾습니다.
-		if (playerAnimator == null)
-		{
-			playerAnimator = GetComponent<Animator>();
-		}
-
-		// Animator 컴포넌트가 없는 경우 오류 메시지를 출력합니다.
-		if (playerAnimator == null)
-		{
-			Debug.LogError("PlayerInput 스크립트가 붙은 GameObject에 Animator 컴포넌트가 없습니다!");
-		}
-	}
-
 	public void Event_Movement(InputAction.CallbackContext context) {
 		//만약 키를 눌렀을 때, Vector값 조정.
 		if (context.phase.Equals(InputActionPhase.Performed)) {
 			playerDirection = context.ReadValue<Vector2>();
-			playerAnimator.SetBool("isRun", true);
+			if (playerAnimator != null)
+			{
+				playerAnimator.SetBool("isRun", true);
 
+			}
 		}
 		//만약 키를 땠을 때, Vector값 조정.
 		else if (context.phase.Equals(InputActionPhase.Canceled)) {
 			playerDirection = Vector2.zero;
-			playerAnimator.SetBool("isRun", false);
+			if (playerAnimator != null)
+			{
+				playerAnimator.SetBool("isRun", false);
 
+			}
 		}
 
 		//플레이어가 W,S를 누르면 벡터의 Y가 조정이 되고 / A,D를 누르면 벡터의 X가 조정이 됩니다.
