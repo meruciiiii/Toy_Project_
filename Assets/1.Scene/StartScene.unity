@@ -6597,7 +6597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD0F1\uCEE4\uD615 \uADFC\uC2E0\uC7AC"
+  m_text: "\uD720\uCCB4\uC5B4\uB9E8 \uADFC\uC2E0\uC7AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5bacf668148834dade42884a377667, type: 2}
   m_sharedMaterial: {fileID: 8068304585045624754, guid: 3c5bacf668148834dade42884a377667, type: 2}
@@ -7541,7 +7541,6 @@ MonoBehaviour:
   player_chractor: 0
   Playername: 
   FinalScore: 0
-  isGameOver: 0
 --- !u!1 &1630126357
 GameObject:
   m_ObjectHideFlags: 0
@@ -7616,7 +7615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1631934798
 RectTransform:
   m_ObjectHideFlags: 0
