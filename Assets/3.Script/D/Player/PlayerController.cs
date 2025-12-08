@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 	protected float playerSpeed = 10f;
 
 	[SerializeField] protected PlayerInput Input;
@@ -11,17 +12,45 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] private MapSize size;
 
+	[Header("시각 효과 설정")]
+	// [수정 1] 하나만 담던 변수를 '배열(Array)'로 변경합니다.
+	[SerializeField] private Renderer[] playerRenderers;
+
+	// 원래 색상들도 파츠별로 다 저장해야 하므로 배열이나 리스트가 필요하지만,
+	// 간단하게 구현하기 위해 '첫 번째 파츠'의 색이나 흰색을 기준으로 잡겠습니다.
+	// (보통 스킬 끝나면 원래대로 돌릴 때 흰색(Color.white)을 넣으면 텍스처 본연의 색이 나옵니다)
+	private Color originalColor = Color.white;
+	private Coroutine visualCoroutine;
+
 	protected virtual void Awake()
 	{
 		TryGetComponent(out player_r);
+
+		TryGetComponent(out player_r);
+
+		// [수정 2] GetComponentsInChildren (뒤에 s 붙음!)으로 자식에 있는 '모든' 렌더러를 다 긁어옵니다.
+		playerRenderers = GetComponentsInChildren<Renderer>();
+
+		if (playerRenderers == null || playerRenderers.Length == 0)
+		{
+			Debug.LogError($"{gameObject.name}: 렌더러를 하나도 못 찾았습니다!");
+		}
+		else
+		{
+			// 디버깅: 몇 개나 찾았는지 확인
+			Debug.Log($"{gameObject.name}: 렌더러 {playerRenderers.Length}개 발견! (다 칠해버립니다)");
+		}
+
 		transform.position = new Vector3(-9f, 0.2f, -8f);
 	}
 
-	private void FixedUpdate() {
+	private void FixedUpdate()
+	{
 		Move();
 	}
 
-	private void LateUpdate() {
+	private void LateUpdate()
+	{
 		//플레이어의 가속은 항상 zero로 맞춰줍니다. 캐릭터는 입력값으로 움직이고, 가속은 존재하지 않기 때문.
 		player_r.linearVelocity = Vector3.zero;
 
@@ -33,7 +62,8 @@ public class PlayerController : MonoBehaviour {
 			);
 	}
 
-	protected virtual void Move() {
+	protected virtual void Move()
+	{
 		//입력받은 키에 따른 벡터 저장.
 		Vector3 playerDirection = new Vector3(Input.playerDirection_x, 0f, Input.playerDirection_z);
 
@@ -43,8 +73,10 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	protected virtual void OnTriggerEnter(Collider other) {
-		if (other.transform.CompareTag("Item")) {
+	protected virtual void OnTriggerEnter(Collider other)
+	{
+		if (other.transform.CompareTag("Item"))
+		{
 			Skill();
 		}
 		else if (other.transform.CompareTag("Obstacle"))
@@ -65,7 +97,72 @@ public class PlayerController : MonoBehaviour {
 		obstacle.SetActive(false);
 		Debug.Log("과제랑 충돌 퇴근시간 지연");
 	}
-	protected virtual void Skill() {
+	protected virtual void Skill()
+	{
 
 	}
+	protected void StartSkillVisual(Color skillColor, float duration)
+	{
+		if (playerRenderers == null) return;
+
+		// 기존 효과가 돌고 있다면 끄고 새로 시작
+		if (visualCoroutine != null) StopCoroutine(visualCoroutine);
+		visualCoroutine = StartCoroutine(SkillVisualRoutine(skillColor, duration));
+	}
+	private IEnumerator SkillVisualRoutine(Color targetColor, float duration)
+	{
+		// 1. 모든 렌더러 색상 변경
+		ChangeAllRenderersColor(targetColor);
+
+		// 2. 대기 (깜빡임 전까지)
+		float blinkDuration = 1.5f;
+		if (duration > blinkDuration) yield return new WaitForSeconds(duration - blinkDuration);
+		else blinkDuration = duration;
+
+		// 3. 깜빡임 효과
+		float blinkTimer = 0f;
+		bool isColored = true; // 현재 스킬 색인지 여부
+
+		while (blinkTimer < blinkDuration)
+		{
+			blinkTimer += 0.15f;
+			isColored = !isColored;
+
+			// 깜빡일 때: 원래 색(흰색) <-> 스킬 색
+			ChangeAllRenderersColor(isColored ? targetColor : originalColor);
+
+			yield return new WaitForSeconds(0.15f);
+		}
+
+		// 4. 종료 후 원래대로 복구 (흰색을 넣으면 텍스처 원래 색이 나옵니다)
+		ChangeAllRenderersColor(originalColor);
+		visualCoroutine = null;
+	}
+	private void ChangeAllRenderersColor(Color color)
+	{
+		if (playerRenderers == null) return;
+
+		foreach (var renderer in playerRenderers)
+		{
+			if (renderer == null) continue;
+
+			// URP 대응
+			if (renderer.material.HasProperty("_BaseColor"))
+				renderer.material.SetColor("_BaseColor", color);
+
+			// 일반 대응
+			renderer.material.color = color;
+
+			// [추가 꿀팁] 만약 색 변화가 너무 미미하다면 'Emission(발광)'을 건드려야 할 수도 있습니다.
+			// 필요하면 아래 주석을 해제하세요.
+			// if (renderer.material.HasProperty("_EmissionColor")) {
+			//     renderer.material.EnableKeyword("_EMISSION");
+			//     renderer.material.SetColor("_EmissionColor", color * 0.5f); // 은은하게 빛남
+			// }
+		}
+	}
 }
+
+
+
+

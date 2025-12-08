@@ -26,13 +26,15 @@ public class ByonController : PlayerController {
     IEnumerator TeacherChanceRoutine() {
         Debug.Log("B: 선생님 찬스 ON (과제만 느려짐)");
 
+        StartSkillVisual(Color.blue, skillDuration);
+
         // 1. 앞으로 생성될 과제들을 위해 스포너에게 알림
         if (spawner != null)
         {
-            // [원본 메서드명 유지] 1. 과제 생성 일시 정지 요청
+            // 1. 과제 생성 일시 정지 요청
             spawner.DelaySpawn(skillDuration);
 
-            // [원본 메서드명 유지] 2. 힌트 아이템 생성 요청
+            // 2. 힌트 아이템 생성 요청
             spawner.spawning_hint(hintSpawnCount);
         }
 
