@@ -1533,6 +1533,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 180623326}
     m_Modifications:
+    - target: {fileID: -2297491550832352907, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
+      propertyPath: assignmentSpawner
+      value: 
+      objectReference: {fileID: 261812437}
     - target: {fileID: 3213682001065698036, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1643,7 +1647,9 @@ MonoBehaviour:
   spawn_timer: 0.2
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
+  assignment_debuff_Prefabs: {fileID: 0}
   hintPrefabs: {fileID: 0}
+  pooling: []
   pool_count: 15
 --- !u!1 &267988644
 GameObject:
@@ -3401,6 +3407,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 180623326}
     m_Modifications:
+    - target: {fileID: -6896722652966758209, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: assignmentSpawner
+      value: 
+      objectReference: {fileID: 261812437}
     - target: {fileID: 1547935882347506940, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_Name
       value: Shin
@@ -3922,6 +3932,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5570380984016489046, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
+      propertyPath: assignmentSpawner
+      value: 
+      objectReference: {fileID: 261812437}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
