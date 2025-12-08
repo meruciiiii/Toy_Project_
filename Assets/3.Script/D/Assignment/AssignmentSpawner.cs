@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AssignmentSpawner : MonoBehaviour {
-	[SerializeField] private float spawn_timer = 0.2f;
+	[SerializeField] public float spawn_timer = 0.2f;
 	[SerializeField] private MapSize size;
 	[SerializeField] private GameObject assignmentPrefabs;
 	[SerializeField] private GameObject hintPrefabs;	
 	private int hint_count = 0;
 
-	private GameObject[] pooling;
+	public GameObject[] pooling;
 	[SerializeField] private int pool_count = 15;
-	private int currnet_pool = 0;
+	private int currnet_pool = 1;
 
 	private void Awake() {
 		pooling = new GameObject[pool_count];
@@ -51,7 +51,7 @@ public class AssignmentSpawner : MonoBehaviour {
 		GameObject assignment = pooling[currnet_pool];
 		currnet_pool++;
 		if (currnet_pool >= pool_count) {
-			currnet_pool = 0;
+			currnet_pool = 1;
 		}
 		spawn_rnd(assignment);
 	}

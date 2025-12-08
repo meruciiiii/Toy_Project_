@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5437602178976119607}
   - component: {fileID: 5964619385300026617}
   - component: {fileID: 2011400307790907170}
+  - component: {fileID: 2608238723166378926}
   m_Layer: 0
   m_Name: Hint
   m_TagString: Hint
@@ -141,3 +142,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2608238723166378926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784850179265856159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 074f7cd8191234d469f5b0a29afae336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintController

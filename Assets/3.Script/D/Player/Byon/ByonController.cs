@@ -10,12 +10,14 @@ public class ByonController : PlayerController {
     [SerializeField] private float hintBonusTime = 2.0f;
     [SerializeField] private int hintSpawnCount = 5;
 
+    [SerializeField] private GameObject assignmentSpawner;
+
     private AssignmentSpawner spawner;
 
     protected override void Awake() {
         base.Awake();
         // 씬에서 스포너 미리 찾기 (민찬님 스크립트)
-        spawner = Object.FindFirstObjectByType<AssignmentSpawner>();
+        assignmentSpawner.TryGetComponent(out spawner);
     }
 
     protected override void Skill() {
@@ -39,10 +41,11 @@ public class ByonController : PlayerController {
         // 2. [Unity 6 변경점] 현재 화면에 있는 모든 과제 찾기
         // FindObjectsOfType -> FindObjectsByType
         // FindObjectsSortMode.None : 정렬 안 함 (가장 빠름)
-        var activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
+        //var activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
 
-        foreach (var assignment in activeAssignments) {
-            assignment.SetSlowMode(true);
+        foreach (GameObject assignment in spawner.pooling) {
+            assignment.TryGetComponent(out AssignmentController assignmentController);
+            assignmentController.SetSlowMode(true);
         }
         // 3. 지속 시간 대기
         yield return new WaitForSeconds(skillDuration);
@@ -52,9 +55,10 @@ public class ByonController : PlayerController {
 
         // 5. 화면에 있는 과제들 다시 원래 속도로 복구
         // 여기도 마찬가지로 최신 API 사용
-        activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
-        foreach (var assignment in activeAssignments) {
-            assignment.SetSlowMode(false);
+        //activeAssignments = Object.FindObjectsByType<AssignmentController>(FindObjectsSortMode.None);
+        foreach (GameObject assignment in spawner.pooling) {
+            assignment.TryGetComponent(out AssignmentController assignmentController);
+            assignmentController.SetSlowMode(false);
         }
         Debug.Log("B: 선생님 찬스 OFF");
     }
