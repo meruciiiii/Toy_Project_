@@ -11,6 +11,13 @@ public class ShinController : PlayerController
     private bool isDrifting = false; // 스킬 사용 중 여부
     private float RotateSpeed = 180f;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        TryGetComponent(out player_r);
+        transform.position = new Vector3(-9f, 0.45f, -8f);
+    }
+
     protected override void Skill()
     {
         StartCoroutine(Wheelchair());
@@ -30,6 +37,9 @@ public class ShinController : PlayerController
     private IEnumerator Wheelchair()
     {
         Debug.Log("C: 휠체어 폭주 시작 (시간 가속 + 조작 어려움)");
+
+        StartSkillVisual(Color.green, skillDuration);
+
         isDrifting = true;
 
         // 이동 속도 증가
