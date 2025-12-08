@@ -9,6 +9,8 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private GameObject Sin_ob;
     [SerializeField] private GameObject Byon_ob;
 
+    [SerializeField] private bool isRankingScene;
+
     private void Start()
     {
         Ppipi_ob.SetActive(false);
@@ -33,6 +35,9 @@ public class GameFlow : MonoBehaviour
                     break;
                 }
         }
-        GameManager.instance.ResetScore();
+        if (!isRankingScene)
+        {
+            GameManager.instance.ResetScore();
+        }
     }
 }

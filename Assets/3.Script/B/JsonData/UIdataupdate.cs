@@ -26,7 +26,7 @@ public class UIdataupdate : MonoBehaviour
     public void DisplayRanking()//시작할때 한번 불러오고, 기록 갱신이후 메서드 사용해서 그때 랭킹 최신화.
     {
         List<Data> ranklist = DataManager.instance.LoadFromJson().Listdata; //리스트를 받아오고
-        for (int i = 0; i < DataManager.instance.Ranking_count; i++) //랭킹 총 카운트(4위까지)
+        for (int i = 0; i < DataManager.instance.Ranking_count; i++) //랭킹 총 카운트(3위까지)
         {
             if (i<ranklist.Count)
             {
