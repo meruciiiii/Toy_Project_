@@ -30,11 +30,14 @@ public class Data //단판 데이터 이걸 리스트에 담아서 저장하겠습니다.
     public Charactor charactor;
     public int Score;
 
-    public Data(string Playername, Charactor charactor, int Score)
+    public int ClearTimeMinutes;
+
+    public Data(string Playername, Charactor charactor, int Score, int ClearTimeMinutes)
     {
         this.Playername = Playername;
         this.charactor = charactor;
         this.Score = Score;
+        this.ClearTimeMinutes = ClearTimeMinutes; //인트화 할겁니다.
     }
 
     public Data() { }//LitJson을 사용하는 경우, 역직렬화 시 객체를 생성하기 위해 기본 생성자가 필요, 
@@ -147,9 +150,9 @@ public class DataManager : MonoBehaviour
             }
         }
 
-        if (rankingdata.Listdata.Count > Ranking_count)//5개?면 쳐내
+        if (rankingdata.Listdata.Count > Ranking_count)//4개?면 쳐내
         {
-            rankingdata.Listdata.RemoveAt(Ranking_count);//4위 이후는 지워버리겠습니다.
+            rankingdata.Listdata.RemoveAt(Ranking_count);//3위 이후는 지워버리겠습니다.
                                                          //세상은 랭커가 아니면 기억을 해주지 않아...
         }
 

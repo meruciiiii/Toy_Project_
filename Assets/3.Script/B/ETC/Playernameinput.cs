@@ -18,7 +18,7 @@ public class Playernameinput : MonoBehaviour
     {
         Ranking rankingData = DataManager.instance.LoadFromJson();
         int finalScore = GameManager.instance.FinalScore;
-        if (rankingData.Listdata.Count >= DataManager.instance.Ranking_count)
+        if (rankingData.Listdata.Count >= DataManager.instance.Ranking_count)//3개가 꽉 차 있다면
         {
             Data thirdPlaceData = rankingData.Listdata[DataManager.instance.Ranking_count - 1];
             if (thirdPlaceData.Score >= finalScore) //점수가 3위랑 같거나 낮으면 쳐내
@@ -70,7 +70,12 @@ public class Playernameinput : MonoBehaviour
         GameManager.instance.Playername = finalName;
         Debug.Log($"플레이어 이름이 '{finalName}'(으)로 확정");
 
-        DataManager.instance.AddNewRanking(new Data(GameManager.instance.Playername, GameManager.instance.player_chractor, GameManager.instance.FinalScore));
+        DataManager.instance.AddNewRanking
+            (new Data
+            (GameManager.instance.Playername, 
+            GameManager.instance.player_chractor, 
+            GameManager.instance.FinalScore,
+            GameManager.instance.ClearTimeMinutes));
         Debug.Log("랭킹 저장!");
 
         Ui_update.SetActive(true);//OnEnable

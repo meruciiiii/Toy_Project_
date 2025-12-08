@@ -178,6 +178,8 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             Debug.Log($"클리어 보너스: 여유분 {remainingMinutes}분 * 50 = {bonusScore}점 추가!");
         }
         GameManager.instance.SetFinalScore(score);
+        int RoundCurrent = Mathf.RoundToInt(currentGameTimeMinutes);
+        GameManager.instance.SetClearTimeMinutes(RoundCurrent);
         Debug.Log($"최종 점수 저장: {score}점");
     }
 
