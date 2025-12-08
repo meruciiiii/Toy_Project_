@@ -11,12 +11,10 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] private MapSize size;
 
-	protected virtual void Awake() {
+	protected virtual void Awake()
+	{
 		TryGetComponent(out player_r);
-	}
-
-	private void OnEnable() {
-		transform.position = new Vector3(-9f, 0f, -8f);
+		transform.position = new Vector3(-9f, 0.2f, -8f);
 	}
 
 	private void FixedUpdate() {

@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Item
   - Obstacle
+  - Hint
   layers:
   - Default
   - TransparentFX

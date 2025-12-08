@@ -55,7 +55,7 @@ public class AssignmentSpawner : MonoBehaviour {
 		}
 		spawn_rnd(assignment);
 	}
-	private void spawn_hint(GameObject prefabs) {
+	public void spawn_hint(GameObject prefabs) {
 		GameObject hint = Instantiate(prefabs);
 		spawn_rnd(hint);
 	}
