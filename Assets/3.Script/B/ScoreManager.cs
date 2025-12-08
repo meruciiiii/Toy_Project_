@@ -7,13 +7,13 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 {
     public static ScoreManager instance;
 
-    private int START_TIME_MINUTES;
-    private int Finish_Time_MINUTES;
-    private int GAME_OVER_TIME_MINUTES;
+    private float START_TIME_MINUTES;// 슬라이드 (MIN)
+    private float Finish_Time_MINUTES; // 슬라이드 (MAX)
+    private float GAME_OVER_TIME_MINUTES;// 슬라이드 (MAX)
 
     public float timeScaleFactor = 10.0f; //1초에 10분 증가//나중에 시간 배율 변경(재호님)
 
-    private float currentGameTimeMinutes;
+    private float currentGameTimeMinutes; // 슬라이드 밸류값(현재 value)
 
     [Header("점수 설정")]
     public int score = 0;
@@ -78,21 +78,27 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
             currentGameTimeMinutes += Time.deltaTime * timeScaleFactor;
 
+
             // 3. 게임 종료 조건 체크 (22:00 도달)
-            if (Finish_Time_MINUTES <= currentGameTimeMinutes)
+            if (Finish_Time_MINUTES >= GAME_OVER_TIME_MINUTES)
             {
-                SaveScore(); // 점수 저장
-                SceneManager.LoadScene(""); // 랭킹 씬 string을 넣어주세요
-                yield break; // 코루틴 즉시 종료
-            }
-            else if (Finish_Time_MINUTES >= GAME_OVER_TIME_MINUTES)
-            {
-                SaveScore(); // 점수 저장
+                ToggleScore();
+                isRunning = false;
                 SceneManager.LoadScene(""); // 게임 오버 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }
 
-            // 4. UI 업데이트
+            // 3. 게임 종료 조건 체크 클리어
+            if (currentGameTimeMinutes >= Finish_Time_MINUTES)
+            {
+                ToggleScore();
+                isRunning = false;
+                SaveScore(); // 점수 저장
+                SceneManager.LoadScene(""); // 랭킹 씬 string을 넣어주세요
+                yield break; // 코루틴 즉시 종료
+            }
+
+            // 5. UI 업데이트
             if (scoreText != null)
             {
                 scoreText.text = "Score: " + score; // 정수 score만 표시
@@ -117,6 +123,8 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     public void OnHit(int damage)
     {
+        if (!isRunning) return;
+
         Finish_Time_MINUTES += damage;
         Debug.Log($"피해 발생! 클리어 목표 시간이 {Finish_Time_MINUTES}로 늦춰졌습니다.");
     }
