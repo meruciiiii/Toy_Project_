@@ -1579,7 +1579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8356616362162210903, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2517,6 +2517,8 @@ MonoBehaviour:
   scorePerSecond: 10
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
+  current_timeSlider: {fileID: 1473665093}
+  GameOver_timeSlider: {fileID: 876574317}
 --- !u!4 &488218711
 Transform:
   m_ObjectHideFlags: 0
@@ -3455,7 +3457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1547935882347506940, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7517280491790367202, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6107,6 +6109,7 @@ MonoBehaviour:
   Ppipi_ob: {fileID: 770055708}
   Sin_ob: {fileID: 655949004}
   Byon_ob: {fileID: 257367863}
+  isRankingScene: 0
 --- !u!4 &1280718598
 Transform:
   m_ObjectHideFlags: 0
