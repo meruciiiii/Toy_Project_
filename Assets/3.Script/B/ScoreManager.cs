@@ -1,6 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI; // 점수를 UI Text에 표시하려면 필요
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
@@ -11,19 +12,22 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     private float Finish_Time_MINUTES; // 슬라이드 (MAX)
     private float GAME_OVER_TIME_MINUTES;// 슬라이드 (MAX)
 
+    [Header("1초에 흐르는 시간")]
     public float timeScaleFactor = 10.0f; //1초에 10분 증가//나중에 시간 배율 변경(재호님)
 
     private float currentGameTimeMinutes; // 슬라이드 밸류값(현재 value)
 
-    [Header("점수 설정")]
-    public int score = 0;
+    private int score = 0;
+    [Header("1초에 늘어나는 점수")]
     public float scorePerSecond = 10;  // 1초당 증가할 점수//나중에 점수 배율 변경(재호님)
     private float scoreAccumulator = 0f; // 미세한 소수점 점수를 누적할 변수 (float) Time.deltaTime 이녀석이 float임
     private Coroutine scoreCoroutine;   // 코루틴 참조를 저장할 변수
 
     [Header("UI 연결 ")]//현재 미작업
-    public Text scoreText; // 점수를 표시할 UI Text 컴포넌트
-    public Text timeText;
+    public TextMeshProUGUI scoreText; //점수를 표시할 UI Text 컴포넌트
+    public TextMeshProUGUI timeText;
+    public Slider current_timeSlider;
+    public Slider GameOver_timeSlider;
 
     private bool isRunning = false;
 
@@ -82,6 +86,8 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             // 3. 게임 종료 조건 체크 (22:00 도달)
             if (Finish_Time_MINUTES >= GAME_OVER_TIME_MINUTES)
             {
+                Finish_Time_MINUTES = GAME_OVER_TIME_MINUTES;
+                currentGameTimeMinutes = Finish_Time_MINUTES;
                 ToggleScore();
                 isRunning = false;
                 SceneManager.LoadScene(""); // 게임 오버 씬 string을 넣어주세요
@@ -91,6 +97,7 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             // 3. 게임 종료 조건 체크 클리어
             if (currentGameTimeMinutes >= Finish_Time_MINUTES)
             {
+                currentGameTimeMinutes = Finish_Time_MINUTES;
                 ToggleScore();
                 isRunning = false;
                 SaveScore(); // 점수 저장
@@ -101,15 +108,22 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             // 5. UI 업데이트
             if (scoreText != null)
             {
-                scoreText.text = "Score: " + score; // 정수 score만 표시
+                scoreText.text = "" + score; // 정수 score만 표시
             }
 
             if (timeText != null)
             {
-                // 분을 시:분 형태로 변환하여 표시
-                int hours = (int)currentGameTimeMinutes / 60;
-                int minutes = (int)currentGameTimeMinutes % 60;
-                timeText.text = $"Time: {hours}:{minutes}"; // 00:00 형식 포맷팅
+                int RoundCurrent;
+                RoundCurrent = Mathf.RoundToInt(currentGameTimeMinutes);
+                int hours = (int)RoundCurrent / 60;
+                int minutes = (int)RoundCurrent % 60;
+                timeText.text = $"{hours:00}:{minutes:00}";//00:00 형식 포맷팅
+            }
+
+            if (current_timeSlider != null&& GameOver_timeSlider !=null)
+            {
+                current_timeSlider.value = currentGameTimeMinutes;
+                GameOver_timeSlider.value = Finish_Time_MINUTES;
             }
             yield return null;
         }
@@ -133,19 +147,28 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     {
         if (On_Skill)
         {
-            timeScaleFactor = 20.0f;
             scorePerSecond = 20;
+            Debug.Log("SinSkill_On!!");
         }
         else
         {
-            timeScaleFactor = 10.0f;
             scorePerSecond = 10;
+            Debug.Log("SinSkill_Off!!");
         }
     }
 
     private void SaveScore()
     {
+        int remainingMinutes = (int)(GAME_OVER_TIME_MINUTES - Finish_Time_MINUTES);
+
+        if (remainingMinutes > 0)
+        {
+            int bonusScore = remainingMinutes * 50; //남은 시간 배율 보너스
+            score += bonusScore;
+            Debug.Log($"클리어 보너스: 여유분 {remainingMinutes}분 * 50 = {bonusScore}점 추가!");
+        }
         GameManager.instance.SetFinalScore(score);
+        Debug.Log($"최종 점수 저장: {score}점");
     }
 
     private void OnDisable()
