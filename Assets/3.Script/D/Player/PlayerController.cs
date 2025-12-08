@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField] private MapSize size;
 
+	[SerializeField] private GameObject assignmentSpawnner;
+	protected AssignmentSpawner spawner;
+
 	[Header("시각 효과 설정")]
 	// [수정 1] 하나만 담던 변수를 '배열(Array)'로 변경합니다.
 	[SerializeField] private Renderer[] playerRenderers;
@@ -25,8 +28,7 @@ public class PlayerController : MonoBehaviour
 	protected virtual void Awake()
 	{
 		TryGetComponent(out player_r);
-
-		TryGetComponent(out player_r);
+		assignmentSpawnner.TryGetComponent(out spawner);
 
 		// [수정 2] GetComponentsInChildren (뒤에 s 붙음!)으로 자식에 있는 '모든' 렌더러를 다 긁어옵니다.
 		playerRenderers = GetComponentsInChildren<Renderer>();
@@ -79,6 +81,10 @@ public class PlayerController : MonoBehaviour
 		{
 			Skill();
 		}
+		else if (other.transform.CompareTag("Debuff"))
+        {
+
+        }
 		else if (other.transform.CompareTag("Obstacle"))
 		{
 			OnHitObstacle(other.gameObject);
