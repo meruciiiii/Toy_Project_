@@ -106,63 +106,43 @@ public class UI_CamarMove : MonoBehaviour
         if (moveCamera) yield break;
     
         moveCamera = true; // 이동 시작 (WaitForBgAndShowUI를 위해)
-    
-        camera_ob.transform.position = cameraStartTransform.position;
-        camera_ob.transform.rotation = cameraStartTransform.rotation;
-    
-        while (Vector3.Distance(camera_ob.transform.position, camaraTargetTransform.position) > 0.2f)
+
+        // 위치와 회전 중 하나라도 목표에 도달하지 않았으면 계속 반복합니다.
+        float positionThreshold = 0.05f; // 위치 이동 완료 임계값 (원래 0.2f였으나 더 작게 조정)
+        float rotationThreshold = 0.3f; // 회전 이동 완료 임계값 (원래와 동일)
+
+        while (Vector3.Distance(camera_ob.transform.position, camaraTargetTransform.position) > positionThreshold ||
+               Quaternion.Angle(camera_ob.transform.rotation, camaraTargetTransform.rotation) > rotationThreshold)
         {
-            //camera_ob.transform.position = Vector3.MoveTowards(
-            //    camera_ob.transform.position,
-            //    camaraTargetTransform.position,
-            //    moveSpeed * Time.deltaTime);
-            //
-            //moveSpeed -= 0.00005f;
-    
+            // 1. 위치 이동 (Lerp로 감속 효과 적용)
             camera_ob.transform.position = Vector3.Lerp(
-            camera_ob.transform.position,
-            camaraTargetTransform.position,
-            moveSpeed * Time.deltaTime); // Lerp로 인해 감속 효과가 발생합니다. Vector용
-            ///비율 보간 이동
-    
-            yield return null; // 위치 이동 루프
-        }
-    
-        // 위치 스냅 (오차 제거)
-        camera_ob.transform.position = camaraTargetTransform.position;
-    
-        // 2단계: 회전 이동 (Position 이동 완료 후 Rotation만 이동)
-        // 회전 이동 완료 시점까지 루프 실행
-        // Quaternion.Angle을 사용하여 두 회전 사이의 각도를 체크
-        while (Quaternion.Angle(camera_ob.transform.rotation, camaraTargetTransform.rotation) > 0.3f)
-        {
-            //camera_ob.transform.rotation = Quaternion.RotateTowards(
-            //    camera_ob.transform.rotation,
-            //    camaraTargetTransform.rotation,
-            //    rotationSpeed * Time.deltaTime);
-            //
-            //moveSpeed -= 0.00005f;
+                camera_ob.transform.position,
+                camaraTargetTransform.position,
+                moveSpeed * Time.deltaTime);
+
+            // 2. 회전 이동 (Slerp로 감속 효과 적용)
             camera_ob.transform.rotation = Quaternion.Slerp(
-            camera_ob.transform.rotation,
-            camaraTargetTransform.rotation,
-            rotationSpeed * Time.deltaTime);// Slerp로 인해 감속 효과가 발생합니다. Quaternion 용
-            //비율 보간 이동
-    
-            yield return null; // 회전 이동 루프
+                camera_ob.transform.rotation,
+                camaraTargetTransform.rotation,
+                rotationSpeed * Time.deltaTime);
+
+            yield return null; // 한 프레임 대기
         }
-    
-        // 회전 스냅 (오차 제거)
+
+        // **이동 완료 후 스냅 (오차 제거)**
+        camera_ob.transform.position = camaraTargetTransform.position;
         camera_ob.transform.rotation = camaraTargetTransform.rotation;
-    
+
+        // **목표와 시작 위치/회전 교체** (다음 이동을 위한 준비)
         Vector3 tempPos = cameraStartTransform.position;
         Quaternion tempRot = cameraStartTransform.rotation;
-    
+
         cameraStartTransform.position = camaraTargetTransform.position;
         cameraStartTransform.rotation = camaraTargetTransform.rotation;
-    
+
         camaraTargetTransform.position = tempPos;
         camaraTargetTransform.rotation = tempRot;
-    
+
         moveCamera = false; // 이동 종료
     }
     
