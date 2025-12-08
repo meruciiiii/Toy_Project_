@@ -16,6 +16,31 @@ public class Playernameinput : MonoBehaviour
 
     private void Start()
     {
+        Ranking rankingData = DataManager.instance.LoadFromJson();
+        int finalScore = GameManager.instance.FinalScore;
+        if (rankingData.Listdata.Count >= DataManager.instance.Ranking_count)
+        {
+            Data thirdPlaceData = rankingData.Listdata[DataManager.instance.Ranking_count - 1];
+            if (thirdPlaceData.Score >= finalScore) //점수가 3위랑 같거나 낮으면 쳐내
+            {
+                //현재 점수가 3위 점수보다 낮으므로 랭킹 진입 실패
+                Debug.Log($"랭킹 진입 실패: 3위 점수({thirdPlaceData.Score}) > 현재 점수({finalScore})");
+
+                // 랭킹 진입이 불가능하므로 이름 입력 UI를 건너뛰고 바로 다음 화면으로 전환하는 로직 추가
+                cur_Ui.SetActive(false); // 이름 입력 UI 비활성화
+                Ui_update.SetActive(true);//OnEnable
+                next_Ui.SetActive(true);
+
+                // 버튼 이벤트 리스너를 추가하지 않거나 버튼을 비활성화하여
+                // OnConfirmButtonClick() 호출을 막음.
+                if (confirmbutton != null)
+                {
+                    confirmbutton.interactable = false;
+                }
+                return; // Start 함수 종료
+            }
+        }
+        Debug.Log($"랭킹 진입 성공");
         // 확인 버튼 클릭 이벤트 연결
         if (confirmbutton != null)
         {
