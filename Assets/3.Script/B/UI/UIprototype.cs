@@ -14,13 +14,6 @@ public class UIprototype : MonoBehaviour
     {
         if (currentUIObject != null) currentUIObject.SetActive(false);
 
-        StartCoroutine(ShowNextUIObjectandSwitch());
-    }
-
-    private IEnumerator ShowNextUIObjectandSwitch()
-    {
-        yield return new WaitForSeconds(1f);
-
         if (nextUIObject != null) nextUIObject.SetActive(true);
         else Debug.Log("UIprototype nextUIObject 이 없습니다. SerializeField이기에 컴포넌트에 GameObject를 연결해주세요");
 
@@ -30,6 +23,7 @@ public class UIprototype : MonoBehaviour
         nextUIObject = tempObject;
         Debug.Log("ShowNextUIObjectandSwitch");
     }
+
 
     public void SceneLoader(string scenename) //버튼용 메소드 입니다.
     {
