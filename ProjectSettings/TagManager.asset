@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - Item
   - Obstacle
+  - Hint
+  - Debuff
   layers:
   - Default
   - TransparentFX

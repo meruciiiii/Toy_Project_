@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bef0339e1413b4e804cd4dbb192f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
-  ItemPrefabs: {fileID: 7052435843205786533, guid: b5aaa0bb677c1ad4a8c45b4a678f0fec, type: 3}
+  Item1Prefabs: {fileID: 7966194404805864938, guid: dce26d2510d67db42a4902320d7eeab4, type: 3}
+  Item2Prefabs: {fileID: 7696438423135992108, guid: 3da0580e7498f684396aaf89d9c1995e, type: 3}
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   Item_Spawn_Timer: 15
