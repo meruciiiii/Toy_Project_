@@ -31,6 +31,13 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     private bool isRunning = false;
 
+    public float GetCurrentTimeMinutes()
+    {
+        return currentGameTimeMinutes;
+    }
+    public float GetStartTime() { return START_TIME_MINUTES; }
+    public float GetMaxDifficultyTime() { return 18 * 60; } // 18:00 (1080분)을 기준으로 난이도 MAX
+
     private void Awake()
     {
        instance = this;

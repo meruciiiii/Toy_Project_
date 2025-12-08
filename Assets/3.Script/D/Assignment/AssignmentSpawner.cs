@@ -7,11 +7,20 @@ public class AssignmentSpawner : MonoBehaviour {
 	[SerializeField] private MapSize size;
 	[SerializeField] private GameObject assignmentPrefabs;
 	[SerializeField] private GameObject assignment_debuff_Prefabs;
-	[SerializeField] private GameObject hintPrefabs;	
+	[SerializeField] private GameObject hintPrefabs;
+
+	private float currentSpawnTimer;
 	private int hint_count = 0;
 
+	[Header("난이도 설정")]
+	[Tooltip("게임 시작 시 스폰 주기 (쉬움)")]
+	[SerializeField] private float maxSpawnTimer = 1.5f;
+
+	[Tooltip("퇴근 직전 스폰 주기 (어려움)")]
+	[SerializeField] private float minSpawnTimer = 0.3f; // 너무 빠르면 0.2f 추천
+
 	public GameObject[] pooling;
-	[SerializeField] private int pool_count = 15;
+	[SerializeField] private int pool_count = 35;
 	private int currnet_pool = 0;
 
 	private void Awake() {
@@ -21,6 +30,7 @@ public class AssignmentSpawner : MonoBehaviour {
 			pooling[i] = Instantiate(assignmentPrefabs);
 			pooling[i].SetActive(false);
 		}
+		currentSpawnTimer = maxSpawnTimer;
 	}
 
 	private void OnEnable() {
@@ -28,11 +38,32 @@ public class AssignmentSpawner : MonoBehaviour {
 	}
 
 	private IEnumerator Assaignment() {
-		WaitForSeconds wfs = new WaitForSeconds(spawn_timer);
-		while (true) {
-			yield return wfs;
+		while (true)
+		{
+			// 1. 현재 난이도(스폰 시간) 계산 업데이트
+			UpdateDifficulty();
+
+			// 2. 계산된 시간만큼 대기 (매번 새로운 시간 적용)
+			yield return new WaitForSeconds(currentSpawnTimer);
+
 			spawn_assignment(assignmentPrefabs);
 		}
+	}
+	private void UpdateDifficulty()
+	{
+		if (ScoreManager.instance == null) return;
+
+		float currentTime = ScoreManager.instance.GetCurrentTimeMinutes();
+		float startTime = ScoreManager.instance.GetStartTime();
+		float maxDiffTime = ScoreManager.instance.GetMaxDifficultyTime(); // 18:00
+
+		// 진행률 계산 (0.0 ~ 1.0)
+		// (현재시간 - 시작시간) / (목표시간 - 시작시간)
+		float progress = Mathf.Clamp01((currentTime - startTime) / (maxDiffTime - startTime));
+
+		// Lerp(선형 보간)를 이용해 진행률에 따라 스폰 주기를 부드럽게 줄임
+		// progress가 0이면 maxSpawnTimer(1.5초), 1이면 minSpawnTimer(0.3초)가 됨
+		currentSpawnTimer = Mathf.Lerp(maxSpawnTimer, minSpawnTimer, progress);
 	}
 
 	public void spawning_hint(int hint_count) {
