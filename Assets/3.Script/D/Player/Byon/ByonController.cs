@@ -8,6 +8,7 @@ public class ByonController : PlayerController {
     public float skillDuration = 5f;
     [Tooltip("힌트 아이템 획득 시 단축될 시간(초)")]
     [SerializeField] private float hintBonusTime = 2.0f;
+    [SerializeField] private int hintSpawnCount = 5;
 
     private AssignmentSpawner spawner;
 
@@ -26,7 +27,14 @@ public class ByonController : PlayerController {
         Debug.Log("B: 선생님 찬스 ON (과제만 느려짐)");
 
         // 1. 앞으로 생성될 과제들을 위해 스포너에게 알림
-        if (spawner != null) spawner.DelaySpawn(skillDuration);
+        if (spawner != null)
+        {
+            // [원본 메서드명 유지] 1. 과제 생성 일시 정지 요청
+            spawner.DelaySpawn(skillDuration);
+
+            // [원본 메서드명 유지] 2. 힌트 아이템 생성 요청
+            spawner.spawning_hint(hintSpawnCount);
+        }
 
         // 2. [Unity 6 변경점] 현재 화면에 있는 모든 과제 찾기
         // FindObjectsOfType -> FindObjectsByType
@@ -49,5 +57,25 @@ public class ByonController : PlayerController {
             assignment.SetSlowMode(false);
         }
         Debug.Log("B: 선생님 찬스 OFF");
+    }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other); // 부모 클래스(PlayerController)의 로직 먼저 실행
+
+        // 힌트 아이템 태그가 "Hint"라고 가정 (프리팹 설정 필요)
+        if (other.CompareTag("Hint"))
+        {
+            // 1. 게임 매니저를 통해 시간 단축
+            //if (GameManager.Instance != null)
+            //{
+              //  GameManager.Instance.ReduceTime(hintBonusTime);
+            //}
+
+            // 2. 힌트 아이템 삭제
+            // Hint는 풀링이 아닌 Instantiate로 생성되므로 Destroy로 삭제합니다.
+            // (AssignmentSpawner.cs의 spawn_hint 메서드 확인 결과)
+            Destroy(other.gameObject);
+            Debug.Log("힌트 획득 퇴근 시간 앞당겨짐");
+        }
     }
 }
