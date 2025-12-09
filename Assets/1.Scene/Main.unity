@@ -2553,12 +2553,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365ef8a9c146804998e8d194b11554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  timeScaleFactor: 120
-  scorePerSecond: 120
+  timeScaleFactor: 10
+  scorePerSecond: 10
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
   current_timeSlider: {fileID: 1473665093}
   GameOver_timeSlider: {fileID: 876574317}
+  Whistle: {fileID: 0}
+  GameOverText: {fileID: 0}
 --- !u!4 &488218711
 Transform:
   m_ObjectHideFlags: 0
