@@ -1538,6 +1538,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 180623326}
     m_Modifications:
     - target: {fileID: -2297491550832352907, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
+      propertyPath: hintSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e8e7ec0a347ef24787fc5480df0cc41, type: 3}
+    - target: {fileID: -2297491550832352907, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: skillDuration
       value: 1
       objectReference: {fileID: 0}

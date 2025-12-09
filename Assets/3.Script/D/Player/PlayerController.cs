@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private AudioClip itemSoundClip;
 	[SerializeField] private AudioClip debuffSoundClip;
 	[SerializeField] private AudioClip hitSoundClip;
-	private AudioSource audioSource;
+	protected AudioSource audioSource;
 
 	[Header("시각 효과 설정")]
 	// [수정 1] 하나만 담던 변수를 '배열(Array)'로 변경합니다.
