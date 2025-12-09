@@ -23,6 +23,8 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     private float scoreAccumulator = 0f; // 미세한 소수점 점수를 누적할 변수 (float) Time.deltaTime 이녀석이 float임
     private Coroutine scoreCoroutine;   // 코루틴 참조를 저장할 변수
 
+    private int originScorePerSecond;
+
     [Header("UI 연결 ")]//현재 미작업
     public TextMeshProUGUI scoreText; //점수를 표시할 UI Text 컴포넌트
     public TextMeshProUGUI timeText;
@@ -51,6 +53,7 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
         Finish_Time_MINUTES = 18 * 60;       //18:00 pm (1080분)
         GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
         currentGameTimeMinutes = START_TIME_MINUTES;
+        originScorePerSecond = scorePerSecond;
         TryGetComponent(out audioSource);
     }
 
@@ -164,12 +167,12 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
     {
         if (On_Skill)
         {
-            scorePerSecond *= 4;
+            scorePerSecond = originScorePerSecond * 4;
             Debug.Log("SinSkill_On!!");
         }
         else
         {
-            scorePerSecond /= 2;
+            scorePerSecond = originScorePerSecond;
             Debug.Log("SinSkill_Off!!");
         }
     }
