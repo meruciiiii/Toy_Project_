@@ -10,6 +10,7 @@ public class ByonController : PlayerController
     [Tooltip("»˘∆Æ æ∆¿Ã≈€ »πµÊ Ω√ ¥‹√‡µ… Ω√∞£(√ )")]
     [SerializeField] private float hintBonusTime = 2.0f;
     [SerializeField] private int hintSpawnCount = 5;
+    [SerializeField] private AudioClip hintSoundClip;
 
     protected override void Skill()
     {
@@ -67,6 +68,7 @@ public class ByonController : PlayerController
         if (other.CompareTag("Hint"))
         {
             int hintScore = 60; // »˘∆Æ »πµÊ ¡°ºˆ
+            audioSource.PlayOneShot(hintSoundClip);
 
             // ScoreManager∏¶ ≈Î«ÿ ¡°ºˆ »πµÊ
             if (ScoreManager.instance != null)
