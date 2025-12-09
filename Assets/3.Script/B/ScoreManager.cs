@@ -31,6 +31,12 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     private bool isRunning = false;
 
+    [Header("게임 종료")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip Whistle;
+    [SerializeField] private TextMeshProUGUI GameOverText;      //이거 카운트다운 텍스트 UI 재사용합니다~~ 착오 없음 바람.
+    
+
     public float GetCurrentTimeMinutes()
     {
         return currentGameTimeMinutes;
@@ -40,11 +46,12 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     private void Awake()
     {
-       instance = this;
-       START_TIME_MINUTES = 9 * 60 + 30;     // 9:30 AM (570분)
-       Finish_Time_MINUTES = 18 * 60;       //18:00 pm (1080분)
-       GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
-       currentGameTimeMinutes = START_TIME_MINUTES;
+        instance = this;
+        START_TIME_MINUTES = 9 * 60 + 30;     // 9:30 AM (570분)
+        Finish_Time_MINUTES = 18 * 60;       //18:00 pm (1080분)
+        GAME_OVER_TIME_MINUTES = 22 * 60;   // 22:00 PM (1320분)
+        currentGameTimeMinutes = START_TIME_MINUTES;
+        TryGetComponent(out audioSource);
     }
 
     private void Start()
@@ -97,6 +104,13 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 currentGameTimeMinutes = Finish_Time_MINUTES;
                 ToggleScore();
                 isRunning = false;
+                GameOverText.text = "게임 종료!";               //텍스트 "게임종료"
+                GameOverText.color = Color.red;                 //텍스트 색 변경
+                GameOverText.enabled = true;                    //텍스트 활성화
+                Time.timeScale = 0f;                            //일시정지
+                audioSource.PlayOneShot(Whistle);               //휘슬 사운드
+                //yield return new WaitForSecondsRealtime(2f);    //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
+                Time.timeScale = 1f;
                 SceneManager.LoadScene("GameOverScene"); // 게임 오버 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }
@@ -108,6 +122,13 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 ToggleScore();
                 isRunning = false;
                 SaveScore(); // 점수 저장
+                Time.timeScale = 0f;                            //일시정지
+                GameOverText.text = "게임 종료!";               //텍스트 "게임종료"
+                GameOverText.color = Color.red;                 //텍스트 색 변경
+                GameOverText.enabled = true;                    //텍스트 활성화
+                audioSource.PlayOneShot(Whistle);               //휘슬 사운드
+                //yield return new WaitForSeconds(2f);        //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
+                Time.timeScale = 1f;
                 SceneManager.LoadScene("GameClearScene"); // 랭킹 씬 string을 넣어주세요
                 yield break; // 코루틴 즉시 종료
             }

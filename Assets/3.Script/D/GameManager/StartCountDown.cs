@@ -24,7 +24,7 @@ public class StartCountDown : MonoBehaviour
 		//WaitForSecondsRealtime << 뒤에 Reatime을 쓰는 이유.
 		//빼먹고 그냥 그거 쓰면, Time.timeScale으로 멈추는 동시에 이것도 같이 멈춤.
 		//따라서 영향을 안받는 Realtime을 붙힌걸 쓰는것...
-
+		audioSource.PlayOneShot(countdownClip);
 		countdownText.text = "3";
 		countdownText.color = Color.red;
 		yield return new WaitForSecondsRealtime(countdown_timer);
