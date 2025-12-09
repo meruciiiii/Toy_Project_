@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SCORE
+  m_text: "\uCF54\uB529\uB825"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32c80c0f16abb6444a7be8119525b9c1, type: 2}
   m_sharedMaterial: {fileID: -8393947696732331587, guid: 32c80c0f16abb6444a7be8119525b9c1, type: 2}

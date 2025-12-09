@@ -1601,7 +1601,7 @@ MonoBehaviour:
   assignment_debuff_Prefabs: {fileID: 8401425939484202193, guid: 4ac8aa297a4986641829ef91504d7079, type: 3}
   hintPrefabs: {fileID: 8784850179265856159, guid: 08d798f8109475a4dba09c8570e509cc, type: 3}
   maxSpawnTimer: 0.3
-  minSpawnTimer: 0.07
+  minSpawnTimer: 0.01
   pooling: []
   pool_count: 100
 --- !u!1 &267988644
@@ -2473,8 +2473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365ef8a9c146804998e8d194b11554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  timeScaleFactor: 6
-  scorePerSecond: 6
+  timeScaleFactor: 10
+  scorePerSecond: 10
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
   current_timeSlider: {fileID: 1473665093}
@@ -7621,7 +7621,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SCORE
+  m_text: "\uCF54\uB529\uB825"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32c80c0f16abb6444a7be8119525b9c1, type: 2}
   m_sharedMaterial: {fileID: -8393947696732331587, guid: 32c80c0f16abb6444a7be8119525b9c1, type: 2}
@@ -17110,7 +17110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShinController
   Input: {fileID: 9074304328087371382}
-  hitPenaltyMinutes: 10
+  hitPenaltyMinutes: 15
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
@@ -17664,7 +17664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongController
   Input: {fileID: 6727723301782429043}
-  hitPenaltyMinutes: 15
+  hitPenaltyMinutes: 20
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
@@ -18673,7 +18673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ByonController
   Input: {fileID: 5119400665506100146}
-  hitPenaltyMinutes: 15
+  hitPenaltyMinutes: 20
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
