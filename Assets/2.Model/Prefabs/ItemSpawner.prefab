@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7182463522246534457}
-  - component: {fileID: 232660592039071340}
+  - component: {fileID: -5091469547435148971}
   m_Layer: 0
   m_Name: ItemSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &232660592039071340
+--- !u!114 &-5091469547435148971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bef0339e1413b4e804cd4dbb192f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
-  Item1Prefabs: {fileID: 7966194404805864938, guid: dce26d2510d67db42a4902320d7eeab4, type: 3}
-  Item2Prefabs: {fileID: 7696438423135992108, guid: 3da0580e7498f684396aaf89d9c1995e, type: 3}
-  Item3Prefabs: {fileID: 5595784658631030847, guid: 3a31676dc8de66f48a480d914a8d274f, type: 3}
+  Item1Prefabs: {fileID: 7052435843205786533, guid: b5aaa0bb677c1ad4a8c45b4a678f0fec, type: 3}
+  Item2Prefabs: {fileID: 5595784658631030847, guid: 3a31676dc8de66f48a480d914a8d274f, type: 3}
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   Item_Spawn_Timer: 15

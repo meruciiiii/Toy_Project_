@@ -8752,7 +8752,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 232660592039071340, guid: 771e58b0d48cca344907b7cbfda87974, type: 3}
+    - target: {fileID: 0}
       propertyPath: Item_Spawn_Timer
       value: 5
       objectReference: {fileID: 0}
