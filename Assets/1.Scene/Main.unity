@@ -1540,6 +1540,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2297491550832352907, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
+      propertyPath: hitPenaltyMinutes
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -2297491550832352907, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: assignmentSpawnner
       value: 
       objectReference: {fileID: 261812437}
@@ -4076,6 +4080,10 @@ PrefabInstance:
     - target: {fileID: 3545910310471721396, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570380984016489046, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
+      propertyPath: hitPenaltyMinutes
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5570380984016489046, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: assignmentSpawnner
@@ -11565,6 +11573,10 @@ PrefabInstance:
     - target: {fileID: 770324399513527761, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: boostSpeed
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 770324399513527761, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
+      propertyPath: hitPenaltyMinutes
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 770324399513527761, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: assignmentSpawnner
