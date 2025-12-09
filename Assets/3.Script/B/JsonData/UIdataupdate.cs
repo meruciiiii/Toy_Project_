@@ -49,6 +49,7 @@ public class UIdataupdate : MonoBehaviour
                 rankNameText[i].text = "null";
                 rankChractor[i].text = "null";
                 rankTimeText[i].text = "null";
+                CheckoutText[i].text = "null";
             }
         }
     }
