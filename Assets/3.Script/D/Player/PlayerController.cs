@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private GameObject assignmentSpawnner;
 	protected AssignmentSpawner spawner;
 
+	[SerializeField] private AudioClip itemSoundClip;
+	[SerializeField] private AudioClip debuffSoundClip;
+	[SerializeField] private AudioClip hitSoundClip;
+	private AudioSource audioSource;
+
 	[Header("시각 효과 설정")]
 	// [수정 1] 하나만 담던 변수를 '배열(Array)'로 변경합니다.
 	[SerializeField] private Renderer[] playerRenderers;
@@ -28,6 +33,7 @@ public class PlayerController : MonoBehaviour
 	protected virtual void Awake()
 	{
 		TryGetComponent(out player_r);
+		TryGetComponent(out audioSource);
 		assignmentSpawnner.TryGetComponent(out spawner);
 
 		// [수정 2] GetComponentsInChildren (뒤에 s 붙음!)으로 자식에 있는 '모든' 렌더러를 다 긁어옵니다.
@@ -79,14 +85,17 @@ public class PlayerController : MonoBehaviour
 	{
 		if (other.transform.CompareTag("Item"))
 		{
+			audioSource.PlayOneShot(itemSoundClip);
 			Skill();
 		}
 		else if (other.transform.CompareTag("Debuff"))
         {
-
+			audioSource.PlayOneShot(debuffSoundClip);
+			spawner.spawn_assignment_from_debuff(10);
         }
 		else if (other.transform.CompareTag("Obstacle"))
 		{
+			audioSource.PlayOneShot(hitSoundClip);
 			OnHitObstacle(other.gameObject);
 		}
 	}
