@@ -25,10 +25,16 @@ public class GameManager : MonoBehaviour
     public Charactor player_chractor;
     public string Playername = "";
     public int FinalScore;
+    public int ClearTimeMinutes;
 
     public void SetFinalScore(int score)
     {
         FinalScore = score;
+    }
+
+    public void SetClearTimeMinutes(int time)
+    {
+        ClearTimeMinutes = time;
     }
 
     public void ResetScore()
