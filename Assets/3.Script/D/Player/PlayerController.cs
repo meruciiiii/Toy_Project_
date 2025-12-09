@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private GameObject assignmentSpawnner;
 	protected AssignmentSpawner spawner;
 
+	[Header("충돌 설정")]
+	// [추가] 과제와 부딪혔을 때 지연시킬 시간 (분 단위)
+	[SerializeField] protected int hitPenaltyMinutes = 30;
+
 	[Header("시각 효과 설정")]
 	// [수정 1] 하나만 담던 변수를 '배열(Array)'로 변경합니다.
 	[SerializeField] private Renderer[] playerRenderers;
@@ -83,7 +87,7 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.transform.CompareTag("Debuff"))
         {
-
+			spawner.spawn_assignment_from_debuff(10);
         }
 		else if (other.transform.CompareTag("Obstacle"))
 		{
@@ -92,14 +96,11 @@ public class PlayerController : MonoBehaviour
 	}
 	protected virtual void OnHitObstacle(GameObject obstacle)
 	{
-		// 1. 게임매니저에게 패널티 부과 요청
-		//if (GameManager.Instance != null)
-		//{
-		//	GameManager.Instance.AddPenaltyTime(hitPenaltyTime);
-		//}
-
-		// 2. 충돌한 과제 오브젝트 삭제 (또는 비활성화)
-		// 충돌 후에도 오브젝트가 남아있으면 계속 충돌 판정이 날 수 있으므로 처리 필요
+		if (ScoreManager.instance != null)
+		{
+			// ScoreManager의 OnHit은 Finish_Time_MINUTES를 증가시킵니다. [ScoreManager.cs 참조]
+			ScoreManager.instance.OnHit(hitPenaltyMinutes);
+		}
 		obstacle.SetActive(false);
 		Debug.Log("과제랑 충돌 퇴근시간 지연");
 	}

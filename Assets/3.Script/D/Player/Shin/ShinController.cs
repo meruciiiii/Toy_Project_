@@ -6,7 +6,7 @@ public class ShinController : PlayerController
 {
     
     [Header("C 스킬 설정")]
-    public float boostSpeed = 13f; // 스킬 시 이동 속도
+    public float boostSpeed = 15f; // 스킬 시 이동 속도
     public float skillDuration = 5f;
     private bool isDrifting = false; // 스킬 사용 중 여부
     private float RotateSpeed = 180f;
@@ -53,7 +53,7 @@ public class ShinController : PlayerController
         }
 
         float elapsedTime = 0f;
-        int driftBonusScore = 5; // 0.1초당 추가 보너스 점수
+        int driftBonusScore = 10; // 0.1초당 추가 보너스 점수
 
         while (elapsedTime < skillDuration)
         {
@@ -83,7 +83,7 @@ public class ShinController : PlayerController
 	protected override void OnTriggerEnter(Collider collision) { 
 		if (isDrifting)
         {
-            //스킬 사용중 부딫혔을 경우, 조금 더 많은 시간 추가.
+            StopCoroutine(Wheelchair());
         } else {
             base.OnTriggerEnter(collision);
 		}

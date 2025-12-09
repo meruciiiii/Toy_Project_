@@ -154,12 +154,12 @@ public class ScoreManager : MonoBehaviour //¾êµµ Àü¿ªÀ¸·Î °ü¸® ½Ì±ÛÅæÀº ¾Æ´Ô
     {
         if (On_Skill)
         {
-            scorePerSecond *= 2;
+            scorePerSecond *= 3;
             Debug.Log("SinSkill_On!!");
         }
         else
         {
-            scorePerSecond /= 2;
+            scorePerSecond /= 3;
             Debug.Log("SinSkill_Off!!");
         }
     }
