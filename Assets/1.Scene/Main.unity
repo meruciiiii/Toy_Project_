@@ -2473,8 +2473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365ef8a9c146804998e8d194b11554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  timeScaleFactor: 10
-  scorePerSecond: 10
+  timeScaleFactor: 15
+  scorePerSecond: 15
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
   current_timeSlider: {fileID: 1473665093}
