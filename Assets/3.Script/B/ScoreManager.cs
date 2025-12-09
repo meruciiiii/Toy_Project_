@@ -56,28 +56,17 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
 
     private void Start()
     {
-        ToggleScore();
+        ScoreIncreaseRoutine();
     }
 
     // 점수 증가 코루틴 시작/정지
-    public void ToggleScore()
+    public void ScoreIncreaseRoutine()
     {
-        if (!isRunning)
-        {
-            // 코루틴이 실행 중이 아닐 때 시작
-            scoreCoroutine = StartCoroutine(ScoreIncreaseRoutine());
-            Debug.Log("점수 증가 시작");
-        }
-        else
-        {
-            // 코루틴이 실행 중일 때 정지
-            StopCoroutine(scoreCoroutine);
-            Debug.Log("점수 증가 정지");
-        }
+       scoreCoroutine = StartCoroutine(ScoreIncreaseRoutine_co());
     }
 
     // Update() 대신 코루틴을 사용하여 점수를 올립니다.
-    private IEnumerator ScoreIncreaseRoutine()
+    private IEnumerator ScoreIncreaseRoutine_co()
     {
         isRunning = true;
 
@@ -102,16 +91,16 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             {
                 Finish_Time_MINUTES = GAME_OVER_TIME_MINUTES;
                 currentGameTimeMinutes = Finish_Time_MINUTES;
-                ToggleScore();
                 isRunning = false;
                 GameOverText.text = "게임 종료!";               //텍스트 "게임종료"
                 GameOverText.color = Color.red;                 //텍스트 색 변경
                 GameOverText.enabled = true;                    //텍스트 활성화
                 Time.timeScale = 0f;                            //일시정지
                 audioSource.PlayOneShot(Whistle);               //휘슬 사운드
-                //yield return new WaitForSecondsRealtime(2f);    //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
+                yield return new WaitForSecondsRealtime(2f);    //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
                 Time.timeScale = 1f;
                 SceneManager.LoadScene("GameOverScene"); // 게임 오버 씬 string을 넣어주세요
+                StopCoroutine(scoreCoroutine);
                 yield break; // 코루틴 즉시 종료
             }
 
@@ -119,7 +108,6 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
             if (currentGameTimeMinutes >= Finish_Time_MINUTES)
             {
                 currentGameTimeMinutes = Finish_Time_MINUTES;
-                ToggleScore();
                 isRunning = false;
                 SaveScore(); // 점수 저장
                 Time.timeScale = 0f;                            //일시정지
@@ -127,9 +115,10 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
                 GameOverText.color = Color.red;                 //텍스트 색 변경
                 GameOverText.enabled = true;                    //텍스트 활성화
                 audioSource.PlayOneShot(Whistle);               //휘슬 사운드
-                //yield return new WaitForSeconds(2f);        //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
+                yield return new WaitForSecondsRealtime(2f);        //휘슬 소리가 2초정도 나오더라구요. 그래서 2초로 설정
                 Time.timeScale = 1f;
                 SceneManager.LoadScene("GameClearScene"); // 랭킹 씬 string을 넣어주세요
+                StopCoroutine(scoreCoroutine);
                 yield break; // 코루틴 즉시 종료
             }
 
@@ -210,5 +199,11 @@ public class ScoreManager : MonoBehaviour //얘도 전역으로 관리 싱글톤은 아님
         {
             StopCoroutine(scoreCoroutine);
         }
+    }
+
+    private IEnumerator Whi()
+    {
+        audioSource.PlayOneShot(Whistle);               //휘슬 사운드
+        yield return new WaitForSecondsRealtime(2f);
     }
 }
