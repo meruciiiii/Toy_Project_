@@ -9,10 +9,14 @@ public class StartCountDown : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI countdownText;
 	[SerializeField] private GameObject scoreManager;
+	[SerializeField] private AudioClip countdownClip;
+	[SerializeField] private float countdown_timer = 1f;
+	private AudioSource audioSource;
 
 	private void Awake() {
-		scoreManager.SetActive(false);
 		Time.timeScale = 0f;
+		TryGetComponent(out audioSource);
+		scoreManager.SetActive(false);
 		StartCoroutine(StartGame());
 	}
 
@@ -20,19 +24,19 @@ public class StartCountDown : MonoBehaviour
 		//WaitForSecondsRealtime << 뒤에 Reatime을 쓰는 이유.
 		//빼먹고 그냥 그거 쓰면, Time.timeScale으로 멈추는 동시에 이것도 같이 멈춤.
 		//따라서 영향을 안받는 Realtime을 붙힌걸 쓰는것...
-
+		audioSource.PlayOneShot(countdownClip);
 		countdownText.text = "3";
 		countdownText.color = Color.red;
-		yield return new WaitForSecondsRealtime(1f);
+		yield return new WaitForSecondsRealtime(countdown_timer);
 		countdownText.text = "2";
 		countdownText.color = Color.orange;
-		yield return new WaitForSecondsRealtime(1f);
+		yield return new WaitForSecondsRealtime(countdown_timer);
 		countdownText.text = "1";
 		countdownText.color = Color.green;
-		yield return new WaitForSecondsRealtime(1f);
+		yield return new WaitForSecondsRealtime(countdown_timer);
 		countdownText.text = "START!";
 		countdownText.color = Color.white;
-		yield return new WaitForSecondsRealtime(1f);
+		yield return new WaitForSecondsRealtime(countdown_timer);
 		Time.timeScale = 1f;
 		scoreManager.SetActive(true);
 		countdownText.enabled = false;

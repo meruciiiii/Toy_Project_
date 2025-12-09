@@ -2553,8 +2553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365ef8a9c146804998e8d194b11554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  timeScaleFactor: 6
-  scorePerSecond: 6
+  timeScaleFactor: 120
+  scorePerSecond: 120
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
   current_timeSlider: {fileID: 1473665093}
@@ -8752,10 +8752,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5091469547435148971, guid: 771e58b0d48cca344907b7cbfda87974, type: 3}
-      propertyPath: Item_Spawn_Timer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3560834497936093537, guid: 771e58b0d48cca344907b7cbfda87974, type: 3}
       propertyPath: m_Name
       value: ItemSpawner
