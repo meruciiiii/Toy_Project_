@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] protected PlayerInput Input;
 	protected Rigidbody player_r;
 
+	[Header("충돌 설정")]
+	// [추가] 과제와 부딪혔을 때 지연시킬 시간 (분 단위)
+	[SerializeField] protected int hitPenaltyMinutes = 10;
+
 	[SerializeField] private MapSize size;
 
 	[SerializeField] private GameObject assignmentSpawnner;
@@ -101,14 +105,15 @@ public class PlayerController : MonoBehaviour
 	}
 	protected virtual void OnHitObstacle(GameObject obstacle)
 	{
-		// 1. 게임매니저에게 패널티 부과 요청
-		//if (GameManager.Instance != null)
-		//{
-		//	GameManager.Instance.AddPenaltyTime(hitPenaltyTime);
-		//}
-
-		// 2. 충돌한 과제 오브젝트 삭제 (또는 비활성화)
-		// 충돌 후에도 오브젝트가 남아있으면 계속 충돌 판정이 날 수 있으므로 처리 필요
+		if (ScoreManager.instance != null)
+		{
+			// ScoreManager의 OnHit은 목표 시간(Finish_Time)을 뒤로 늦춥니다.
+			ScoreManager.instance.OnHit(hitPenaltyMinutes);
+		}
+		else
+		{
+			Debug.LogError("ScoreManager가 없습니다! 패널티 적용 실패.");
+		}
 		obstacle.SetActive(false);
 		Debug.Log("과제랑 충돌 퇴근시간 지연");
 	}
@@ -168,12 +173,6 @@ public class PlayerController : MonoBehaviour
 			// 일반 대응
 			renderer.material.color = color;
 
-			// [추가 꿀팁] 만약 색 변화가 너무 미미하다면 'Emission(발광)'을 건드려야 할 수도 있습니다.
-			// 필요하면 아래 주석을 해제하세요.
-			// if (renderer.material.HasProperty("_EmissionColor")) {
-			//     renderer.material.EnableKeyword("_EMISSION");
-			//     renderer.material.SetColor("_EmissionColor", color * 0.5f); // 은은하게 빛남
-			// }
 		}
 	}
 }
