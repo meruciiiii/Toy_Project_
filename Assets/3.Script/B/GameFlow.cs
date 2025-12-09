@@ -13,9 +13,9 @@ public class GameFlow : MonoBehaviour
 
     private void Start()
     {
-        Ppipi_ob.SetActive(false);
-        Ppipi_ob.SetActive(false);
-        Ppipi_ob.SetActive(false);
+        //Ppipi_ob.SetActive(false);
+        //Ppipi_ob.SetActive(false);
+        //Ppipi_ob.SetActive(false);
 
         switch (GameManager.instance.player_chractor)
         {

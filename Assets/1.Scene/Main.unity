@@ -1600,8 +1600,8 @@ MonoBehaviour:
   assignmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
   assignment_debuff_Prefabs: {fileID: 8401425939484202193, guid: 4ac8aa297a4986641829ef91504d7079, type: 3}
   hintPrefabs: {fileID: 8784850179265856159, guid: 08d798f8109475a4dba09c8570e509cc, type: 3}
-  maxSpawnTimer: 0.3
-  minSpawnTimer: 0.05
+  maxSpawnTimer: 0.1
+  minSpawnTimer: 0.07
   pooling: []
   pool_count: 100
 --- !u!1 &267988644
@@ -17110,7 +17110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShinController
   Input: {fileID: 9074304328087371382}
-  hitPenaltyMinutes: 15
+  hitPenaltyMinutes: 10
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
