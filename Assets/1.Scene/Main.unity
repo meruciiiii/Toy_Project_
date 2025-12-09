@@ -8860,6 +8860,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5091469547435148971, guid: 771e58b0d48cca344907b7cbfda87974, type: 3}
+      propertyPath: Item_Spawn_Timer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3560834497936093537, guid: 771e58b0d48cca344907b7cbfda87974, type: 3}
       propertyPath: m_Name
       value: ItemSpawner
