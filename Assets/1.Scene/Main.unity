@@ -1603,7 +1603,7 @@ MonoBehaviour:
   maxSpawnTimer: 0.3
   minSpawnTimer: 0.07
   pooling: []
-  pool_count: 30
+  pool_count: 100
 --- !u!1 &267988644
 GameObject:
   m_ObjectHideFlags: 0
@@ -16833,7 +16833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
   playerDirection: {x: 0, y: 0}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 257367870}
 --- !u!137 &5120969032581196493
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -17117,7 +17117,7 @@ MonoBehaviour:
   debuffSoundClip: {fileID: 8300000, guid: e61f185688106fd45baae60619a709fb, type: 3}
   hitSoundClip: {fileID: 8300000, guid: dc31cc72769da7d46bcc0e1bb787b08d, type: 3}
   playerRenderers: []
-  boostSpeed: 13
+  boostSpeed: 20
   skillDuration: 5
 --- !u!1 &5236417240690851247
 GameObject:
@@ -17664,14 +17664,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongController
   Input: {fileID: 6727723301782429043}
-  hitPenaltyMinutes: 10
+  hitPenaltyMinutes: 15
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
   debuffSoundClip: {fileID: 8300000, guid: e61f185688106fd45baae60619a709fb, type: 3}
   hitSoundClip: {fileID: 8300000, guid: dc31cc72769da7d46bcc0e1bb787b08d, type: 3}
   playerRenderers: []
-  skillDuration: 4
+  skillDuration: 3
 --- !u!4 &5577870516082512914
 Transform:
   m_ObjectHideFlags: 0
@@ -18564,7 +18564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
   playerDirection: {x: 0, y: 0}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 770055714}
 --- !u!4 &6764496680190074295
 Transform:
   m_ObjectHideFlags: 0
@@ -18673,14 +18673,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ByonController
   Input: {fileID: 5119400665506100146}
-  hitPenaltyMinutes: 10
+  hitPenaltyMinutes: 15
   size: {fileID: 11400000, guid: f5233c8bf133ada4c88006e312faf48a, type: 2}
   assignmentSpawnner: {fileID: 261812437}
   itemSoundClip: {fileID: 8300000, guid: a87ca81b3b534d847b48d76bd61f2dce, type: 3}
   debuffSoundClip: {fileID: 8300000, guid: e61f185688106fd45baae60619a709fb, type: 3}
   hitSoundClip: {fileID: 8300000, guid: dc31cc72769da7d46bcc0e1bb787b08d, type: 3}
   playerRenderers: []
-  skillDuration: 5
+  skillDuration: 1
   hintBonusTime: 2
   hintSpawnCount: 5
   hintSoundClip: {fileID: 8300000, guid: 4e8e7ec0a347ef24787fc5480df0cc41, type: 3}
@@ -21143,7 +21143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8359398824619077215
 Transform:
   m_ObjectHideFlags: 0
