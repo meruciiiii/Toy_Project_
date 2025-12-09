@@ -2554,7 +2554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365ef8a9c146804998e8d194b11554a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  timeScaleFactor: 6
+  timeScaleFactor: 120
   scorePerSecond: 6
   scoreText: {fileID: 1644212500}
   timeText: {fileID: 1173121783}
