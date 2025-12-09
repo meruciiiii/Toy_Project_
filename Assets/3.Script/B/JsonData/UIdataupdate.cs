@@ -7,9 +7,10 @@ using TMPro;
 
 public class UIdataupdate : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI[] rankNameText;
-    public TMPro.TextMeshProUGUI[] rankChractor;
-    public TMPro.TextMeshProUGUI[] rankTimeText;
+    public TextMeshProUGUI[] rankNameText;
+    public TextMeshProUGUI[] rankChractor;
+    public TextMeshProUGUI[] rankTimeText;
+    public TextMeshProUGUI[] CheckoutText;
 
     private void OnEnable()//Enable로 하지 마라...
     {
@@ -34,6 +35,13 @@ public class UIdataupdate : MonoBehaviour
                 rankNameText[i].text = "" + curRank.Playername;
                 rankChractor[i].text = "" + curRank.charactor.ToString();
                 rankTimeText[i].text = "" + curRank.Score.ToString();
+                int cleartime = GameManager.instance.ClearTimeMinutes;
+                int hour = cleartime / 60;
+                int minute = cleartime % 60;
+                if (CheckoutText != null)
+                {
+                    CheckoutText[i].text = $"{hour:00}:{minute:00}";
+                }
             }
             else
             {
