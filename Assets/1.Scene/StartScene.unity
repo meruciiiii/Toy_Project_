@@ -4400,7 +4400,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7918407620251341824, guid: 11c4d47ec1bb4904d99c72b5a3f11cdc, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b0bf94ccbe19f1c45aa6b04dce99fac1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -7226,7 +7226,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Botton_change
   currentUIObject: {fileID: 1971691277}
   nextUIObject: {fileID: 1944590526}
-  ClickSoundManager: {fileID: 0}
 --- !u!1 &1407244342
 GameObject:
   m_ObjectHideFlags: 0

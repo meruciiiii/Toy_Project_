@@ -1549,15 +1549,15 @@ PrefabInstance:
       objectReference: {fileID: 261812437}
     - target: {fileID: 3213682001065698036, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3213682001065698036, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3213682001065698036, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3213682001065698036, guid: 5fe9f218e29c53c419afb2c6945fe938, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1705,8 +1705,8 @@ MonoBehaviour:
   assignmentPrefabs: {fileID: 8401425939484202193, guid: 2cf21bf47f640ee408c61c3d3e6ad243, type: 3}
   assignment_debuff_Prefabs: {fileID: 8401425939484202193, guid: 4ac8aa297a4986641829ef91504d7079, type: 3}
   hintPrefabs: {fileID: 8784850179265856159, guid: 08d798f8109475a4dba09c8570e509cc, type: 3}
-  maxSpawnTimer: 0.5
-  minSpawnTimer: 0.1
+  maxSpawnTimer: 0.3
+  minSpawnTimer: 0.01
   pooling: []
   pool_count: 50
 --- !u!1 &267988644
@@ -4027,15 +4027,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3545910310471721396, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3545910310471721396, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3545910310471721396, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 3545910310471721396, guid: c13bafc35db9ebb4f969a6deea2b33f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11592,15 +11592,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056764700211277319, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 9056764700211277319, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 9056764700211277319, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 9056764700211277319, guid: ac8c5fa618369424292960a4b36a31d7, type: 3}
       propertyPath: m_LocalPosition.x
