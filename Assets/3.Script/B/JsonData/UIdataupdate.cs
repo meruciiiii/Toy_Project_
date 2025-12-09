@@ -35,7 +35,7 @@ public class UIdataupdate : MonoBehaviour
                 rankNameText[i].text = "" + curRank.Playername;
                 rankChractor[i].text = "" + curRank.charactor.ToString();
                 rankTimeText[i].text = "" + curRank.Score.ToString();
-                int cleartime = GameManager.instance.ClearTimeMinutes;
+                int cleartime = curRank.ClearTimeMinutes;
                 int hour = cleartime / 60;
                 int minute = cleartime % 60;
                 if (CheckoutText != null)
