@@ -82,8 +82,10 @@ public class ShinController : PlayerController
 	protected override void OnTriggerEnter(Collider collision) { 
 		if (isDrifting)
         {
-            
-        } else {
+            base.OnTriggerEnter(collision);
+        } 
+        else 
+        {
             base.OnTriggerEnter(collision);
 		}
 	}
